@@ -24,7 +24,8 @@ class TodoMiddleware implements EpicClass<BuiltList<Todo>> {
           yield SuccessCreateTodoAction(
               (updates) => updates..todo = todo.toBuilder());
         } catch (e) {
-          //TODO: Add ErrorAction
+          yield ErrorCreateTodoAction(
+              (updates) => updates..error = e.toString());
         }
       } else if (action is DoReadTodoAction) {
         try {
