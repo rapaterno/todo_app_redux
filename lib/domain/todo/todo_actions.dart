@@ -4,6 +4,17 @@ import 'package:todo_app_redux/data/model/todo.dart';
 
 part 'todo_actions.g.dart';
 
+abstract class DoCreateTodoAction
+    implements Built<DoCreateTodoAction, DoCreateTodoActionBuilder> {
+  String get name;
+  bool get isComplete;
+  DoCreateTodoAction._();
+
+  factory DoCreateTodoAction(
+          [void Function(DoCreateTodoActionBuilder) updates]) =
+      _$DoCreateTodoAction;
+}
+
 abstract class SuccessCreateTodoAction
     implements Built<SuccessCreateTodoAction, SuccessCreateTodoActionBuilder> {
   // Fields
@@ -14,6 +25,14 @@ abstract class SuccessCreateTodoAction
   factory SuccessCreateTodoAction(
           [void Function(SuccessCreateTodoActionBuilder) updates]) =
       _$SuccessCreateTodoAction;
+}
+
+abstract class DoReadTodoAction
+    implements Built<DoReadTodoAction, DoReadTodoActionBuilder> {
+  DoReadTodoAction._();
+
+  factory DoReadTodoAction([void Function(DoReadTodoActionBuilder) updates]) =
+      _$DoReadTodoAction;
 }
 
 abstract class SuccessReadTodoAction
@@ -27,6 +46,17 @@ abstract class SuccessReadTodoAction
       _$SuccessReadTodoAction;
 }
 
+abstract class DoUpdateTodoAction
+    implements Built<DoUpdateTodoAction, DoUpdateTodoActionBuilder> {
+  // Fields
+  Todo get updatedTodo;
+  DoUpdateTodoAction._();
+
+  factory DoUpdateTodoAction(
+          [void Function(DoUpdateTodoActionBuilder) updates]) =
+      _$DoUpdateTodoAction;
+}
+
 abstract class SuccessUpdateTodoAction
     implements Built<SuccessUpdateTodoAction, SuccessUpdateTodoActionBuilder> {
   Todo get updatedTodo;
@@ -36,6 +66,18 @@ abstract class SuccessUpdateTodoAction
   factory SuccessUpdateTodoAction(
           [void Function(SuccessUpdateTodoActionBuilder) updates]) =
       _$SuccessUpdateTodoAction;
+}
+
+abstract class DoDeleteTodoAction
+    implements Built<DoDeleteTodoAction, DoDeleteTodoActionBuilder> {
+  // Fields
+  Todo get deletedTodo;
+
+  DoDeleteTodoAction._();
+
+  factory DoDeleteTodoAction(
+          [void Function(DoDeleteTodoActionBuilder) updates]) =
+      _$DoDeleteTodoAction;
 }
 
 abstract class SuccessDeleteTodoAction
