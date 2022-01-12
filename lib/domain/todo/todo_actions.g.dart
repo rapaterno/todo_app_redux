@@ -191,4 +191,194 @@ class SuccessReadTodoActionBuilder
   }
 }
 
+class _$SuccessUpdateTodoAction extends SuccessUpdateTodoAction {
+  @override
+  final Todo updatedTodo;
+
+  factory _$SuccessUpdateTodoAction(
+          [void Function(SuccessUpdateTodoActionBuilder)? updates]) =>
+      (new SuccessUpdateTodoActionBuilder()..update(updates)).build();
+
+  _$SuccessUpdateTodoAction._({required this.updatedTodo}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        updatedTodo, 'SuccessUpdateTodoAction', 'updatedTodo');
+  }
+
+  @override
+  SuccessUpdateTodoAction rebuild(
+          void Function(SuccessUpdateTodoActionBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  SuccessUpdateTodoActionBuilder toBuilder() =>
+      new SuccessUpdateTodoActionBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is SuccessUpdateTodoAction && updatedTodo == other.updatedTodo;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, updatedTodo.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('SuccessUpdateTodoAction')
+          ..add('updatedTodo', updatedTodo))
+        .toString();
+  }
+}
+
+class SuccessUpdateTodoActionBuilder
+    implements
+        Builder<SuccessUpdateTodoAction, SuccessUpdateTodoActionBuilder> {
+  _$SuccessUpdateTodoAction? _$v;
+
+  TodoBuilder? _updatedTodo;
+  TodoBuilder get updatedTodo => _$this._updatedTodo ??= new TodoBuilder();
+  set updatedTodo(TodoBuilder? updatedTodo) =>
+      _$this._updatedTodo = updatedTodo;
+
+  SuccessUpdateTodoActionBuilder();
+
+  SuccessUpdateTodoActionBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _updatedTodo = $v.updatedTodo.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(SuccessUpdateTodoAction other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$SuccessUpdateTodoAction;
+  }
+
+  @override
+  void update(void Function(SuccessUpdateTodoActionBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$SuccessUpdateTodoAction build() {
+    _$SuccessUpdateTodoAction _$result;
+    try {
+      _$result = _$v ??
+          new _$SuccessUpdateTodoAction._(updatedTodo: updatedTodo.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'updatedTodo';
+        updatedTodo.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'SuccessUpdateTodoAction', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$SuccessDeleteTodoAction extends SuccessDeleteTodoAction {
+  @override
+  final Todo deletedTodo;
+
+  factory _$SuccessDeleteTodoAction(
+          [void Function(SuccessDeleteTodoActionBuilder)? updates]) =>
+      (new SuccessDeleteTodoActionBuilder()..update(updates)).build();
+
+  _$SuccessDeleteTodoAction._({required this.deletedTodo}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        deletedTodo, 'SuccessDeleteTodoAction', 'deletedTodo');
+  }
+
+  @override
+  SuccessDeleteTodoAction rebuild(
+          void Function(SuccessDeleteTodoActionBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  SuccessDeleteTodoActionBuilder toBuilder() =>
+      new SuccessDeleteTodoActionBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is SuccessDeleteTodoAction && deletedTodo == other.deletedTodo;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, deletedTodo.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('SuccessDeleteTodoAction')
+          ..add('deletedTodo', deletedTodo))
+        .toString();
+  }
+}
+
+class SuccessDeleteTodoActionBuilder
+    implements
+        Builder<SuccessDeleteTodoAction, SuccessDeleteTodoActionBuilder> {
+  _$SuccessDeleteTodoAction? _$v;
+
+  TodoBuilder? _deletedTodo;
+  TodoBuilder get deletedTodo => _$this._deletedTodo ??= new TodoBuilder();
+  set deletedTodo(TodoBuilder? deletedTodo) =>
+      _$this._deletedTodo = deletedTodo;
+
+  SuccessDeleteTodoActionBuilder();
+
+  SuccessDeleteTodoActionBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _deletedTodo = $v.deletedTodo.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(SuccessDeleteTodoAction other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$SuccessDeleteTodoAction;
+  }
+
+  @override
+  void update(void Function(SuccessDeleteTodoActionBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$SuccessDeleteTodoAction build() {
+    _$SuccessDeleteTodoAction _$result;
+    try {
+      _$result = _$v ??
+          new _$SuccessDeleteTodoAction._(deletedTodo: deletedTodo.build());
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'deletedTodo';
+        deletedTodo.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'SuccessDeleteTodoAction', _$failedField, e.toString());
+      }
+      rethrow;
+    }
+    replace(_$result);
+    return _$result;
+  }
+}
+
 // ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

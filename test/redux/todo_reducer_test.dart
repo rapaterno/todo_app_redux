@@ -1,5 +1,6 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:todo_app_redux/data/model/todo.dart';
 import 'package:todo_app_redux/domain/todo/todo_actions.dart';
 import 'package:todo_app_redux/domain/todo/todo_reducer.dart';
@@ -24,12 +25,10 @@ void main() {
       BuiltList<Todo> state = <Todo>[].build();
       final todo = mockTodos[0];
 
-      final stateBuilder = state.toBuilder();
-
       final newState = todoReducer(
           state, SuccessCreateTodoAction((b) => b..todo = todo.toBuilder()));
 
-      expect(state[0], todo);
+      expect(newState[0], todo);
     });
 
     test('when reading todos', () {
@@ -39,6 +38,28 @@ void main() {
           SuccessReadTodoAction((b) => b..todos = mockTodos.toBuilder()));
 
       expect(newState, mockTodos);
+    });
+
+    test('when updating todo', () {
+      BuiltList<Todo> state = mockTodos;
+      final updatedTodoBuilder = mockTodos[2].toBuilder();
+      updatedTodoBuilder.isComplete = true;
+
+      final newState = todoReducer(state,
+          SuccessUpdateTodoAction((b) => b..updatedTodo = updatedTodoBuilder));
+
+      expect(newState[2], updatedTodoBuilder.build());
+    });
+
+    test('when deleting todo', () {
+      BuiltList<Todo> state = mockTodos;
+
+      final newState = todoReducer(
+          state,
+          SuccessDeleteTodoAction(
+              (b) => b..deletedTodo = mockTodos[0].toBuilder()));
+
+      expect(newState.length, mockTodos.length - 1);
     });
   });
 }

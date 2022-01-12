@@ -26,3 +26,26 @@ abstract class SuccessReadTodoAction
           [void Function(SuccessReadTodoActionBuilder) updates]) =
       _$SuccessReadTodoAction;
 }
+
+abstract class SuccessUpdateTodoAction
+    implements Built<SuccessUpdateTodoAction, SuccessUpdateTodoActionBuilder> {
+  Todo get updatedTodo;
+
+  SuccessUpdateTodoAction._();
+
+  factory SuccessUpdateTodoAction(
+          [void Function(SuccessUpdateTodoActionBuilder) updates]) =
+      _$SuccessUpdateTodoAction;
+}
+
+abstract class SuccessDeleteTodoAction
+    implements Built<SuccessDeleteTodoAction, SuccessDeleteTodoActionBuilder> {
+  // Fields
+  Todo get deletedTodo;
+
+  SuccessDeleteTodoAction._();
+
+  factory SuccessDeleteTodoAction(
+          [void Function(SuccessDeleteTodoActionBuilder) updates]) =
+      _$SuccessDeleteTodoAction;
+}
