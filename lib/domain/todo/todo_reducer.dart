@@ -10,6 +10,10 @@ BuiltList<Todo> todoReducer(BuiltList<Todo> state, dynamic action) {
     return _readTodos(action);
   } else if (action is SuccessUpdateTodoAction) {
     return _updateTodo(state, action);
+  } else if (action is SuccessDeleteTodoAction) {
+    final stateBuilder = state.toBuilder();
+    stateBuilder.removeWhere((todo) => todo.id == action.deletedTodo.id);
+    return stateBuilder.build();
   }
 
   return state;
