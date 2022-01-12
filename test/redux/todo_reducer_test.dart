@@ -26,7 +26,7 @@ void main() {
 
       final stateBuilder = state.toBuilder();
 
-      state = todoReducer(
+      final newState = todoReducer(
           state, SuccessCreateTodoAction((b) => b..todo = todo.toBuilder()));
 
       expect(state[0], todo);
