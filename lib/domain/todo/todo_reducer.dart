@@ -8,6 +8,8 @@ BuiltList<Todo> todoReducer(BuiltList<Todo> state, dynamic action) {
     final stateBuilder = state.toBuilder();
     stateBuilder.add(action.todo);
     return stateBuilder.build();
+  } else if (action is SuccessReadTodoAction) {
+    return action.todos;
   }
 
   return state;
