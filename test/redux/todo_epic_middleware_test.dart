@@ -66,6 +66,35 @@ void main() {
         SuccessCreateTodoAction((updates) => updates..todo = todo.toBuilder())
       ]);
     });
+
+    test(
+        'should respond with ErrorCreateTodoAction in response to repository error',
+        () async {
+      // Given
+      final todo = Todo((todo) => todo
+        ..id = 'id'
+        ..name = 'Todo 1'
+        ..isComplete = false);
+
+      final action = DoCreateTodoAction((updates) => updates
+        ..name = todo.name
+        ..isComplete = todo.isComplete);
+
+      // When
+      when(mockRepository.create(todo)).thenThrow(Error());
+      when(mockUuidProvider.generateUuid())
+          .thenAnswer((realInvocation) => 'id');
+
+      Stream<dynamic> actual = middleware.call(
+        Stream.fromIterable([action]).asBroadcastStream(),
+        EpicStore<BuiltList<Todo>>(mockStore),
+      );
+
+      //Then
+      expect(await actual.toList(), [
+        ErrorCreateTodoAction((updates) => updates..error = Error().toString())
+      ]);
+    });
     test(
         'should respond SuccessReadTodoAction in response to DoReadTodosAction',
         () async {
