@@ -195,6 +195,88 @@ class SuccessCreateTodoActionBuilder
   }
 }
 
+class _$ErrorCreateTodoAction extends ErrorCreateTodoAction {
+  @override
+  final String error;
+
+  factory _$ErrorCreateTodoAction(
+          [void Function(ErrorCreateTodoActionBuilder)? updates]) =>
+      (new ErrorCreateTodoActionBuilder()..update(updates)).build();
+
+  _$ErrorCreateTodoAction._({required this.error}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        error, 'ErrorCreateTodoAction', 'error');
+  }
+
+  @override
+  ErrorCreateTodoAction rebuild(
+          void Function(ErrorCreateTodoActionBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ErrorCreateTodoActionBuilder toBuilder() =>
+      new ErrorCreateTodoActionBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ErrorCreateTodoAction && error == other.error;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, error.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ErrorCreateTodoAction')
+          ..add('error', error))
+        .toString();
+  }
+}
+
+class ErrorCreateTodoActionBuilder
+    implements Builder<ErrorCreateTodoAction, ErrorCreateTodoActionBuilder> {
+  _$ErrorCreateTodoAction? _$v;
+
+  String? _error;
+  String? get error => _$this._error;
+  set error(String? error) => _$this._error = error;
+
+  ErrorCreateTodoActionBuilder();
+
+  ErrorCreateTodoActionBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _error = $v.error;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ErrorCreateTodoAction other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$ErrorCreateTodoAction;
+  }
+
+  @override
+  void update(void Function(ErrorCreateTodoActionBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$ErrorCreateTodoAction build() {
+    final _$result = _$v ??
+        new _$ErrorCreateTodoAction._(
+            error: BuiltValueNullFieldError.checkNotNull(
+                error, 'ErrorCreateTodoAction', 'error'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$DoReadTodoAction extends DoReadTodoAction {
   factory _$DoReadTodoAction(
           [void Function(DoReadTodoActionBuilder)? updates]) =>

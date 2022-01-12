@@ -27,6 +27,17 @@ abstract class SuccessCreateTodoAction
       _$SuccessCreateTodoAction;
 }
 
+abstract class ErrorCreateTodoAction
+    implements Built<ErrorCreateTodoAction, ErrorCreateTodoActionBuilder> {
+  String get error;
+
+  ErrorCreateTodoAction._();
+
+  factory ErrorCreateTodoAction(
+          [void Function(ErrorCreateTodoActionBuilder) updates]) =
+      _$ErrorCreateTodoAction;
+}
+
 abstract class DoReadTodoAction
     implements Built<DoReadTodoAction, DoReadTodoActionBuilder> {
   DoReadTodoAction._();
