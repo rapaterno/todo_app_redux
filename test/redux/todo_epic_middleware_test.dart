@@ -9,7 +9,7 @@ import 'package:todo_app_redux/domain/todo/todo_actions.dart';
 import 'package:todo_app_redux/domain/todo/todo_epic_middleware.dart';
 
 import '../mocks.dart';
-import 'mock_todos.dart';
+import '../mock_todos.dart';
 import 'todo_middleware_test.mocks.dart';
 
 class MockStore extends Mock implements Store<AppState> {
