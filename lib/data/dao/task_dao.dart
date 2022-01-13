@@ -25,7 +25,10 @@ class TodoDao implements AbstractTodoDao {
   }
 
   @override
-  Future<void> deleteTodo(Todo todo) async {}
+  Future<void> deleteTodo(Todo todo) async {
+    final db = await _dbProvider.database;
+    await db.delete(kTodoTable, where: 'id = ?', whereArgs: [todo.id]);
+  }
 
   @override
   Future<List<Todo>> selectAllTodos() async {
