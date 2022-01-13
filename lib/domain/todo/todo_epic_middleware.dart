@@ -3,16 +3,17 @@ import 'package:redux_epics/redux_epics.dart';
 import 'package:todo_app_redux/data/model/todo.dart';
 import 'package:todo_app_redux/data/provider/uuid_provider.dart';
 import 'package:todo_app_redux/data/repository/todo_repository.dart';
+import 'package:todo_app_redux/domain/app/app_state.dart';
 import 'package:todo_app_redux/domain/todo/todo_actions.dart';
 
-class TodoMiddleware implements EpicClass<BuiltList<Todo>> {
+class TodoMiddleware implements EpicClass<AppState> {
   final AbstractTodoRepository _todoRepository;
   final AbstractUuidProvider _uuidProvider;
 
   TodoMiddleware(this._todoRepository, this._uuidProvider);
 
   @override
-  Stream call(Stream actions, EpicStore<BuiltList<Todo>> store) async* {
+  Stream call(Stream actions, EpicStore<AppState> store) async* {
     await for (final action in actions) {
       if (action is DoCreateTodoAction) {
         final todo = Todo((b) => b

@@ -4,6 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_epics/redux_epics.dart';
 import 'package:todo_app_redux/data/model/todo.dart';
+import 'package:todo_app_redux/domain/app/app_state.dart';
 import 'package:todo_app_redux/domain/todo/todo_actions.dart';
 import 'package:todo_app_redux/domain/todo/todo_epic_middleware.dart';
 
@@ -11,13 +12,10 @@ import '../mocks.dart';
 import 'mock_todos.dart';
 import 'todo_middleware_test.mocks.dart';
 
-class MockStore extends Mock implements Store<BuiltList<Todo>> {
+class MockStore extends Mock implements Store<AppState> {
   final BuiltList<Todo> todos;
 
   MockStore(this.todos);
-
-  @override
-  BuiltList<Todo> get state => todos;
 }
 
 void main() {
@@ -58,7 +56,7 @@ void main() {
 
       Stream<dynamic> actual = middleware.call(
         Stream.fromIterable([action]).asBroadcastStream(),
-        EpicStore<BuiltList<Todo>>(mockStore),
+        EpicStore<AppState>(mockStore),
       );
 
       //Then
@@ -87,7 +85,7 @@ void main() {
 
       Stream<dynamic> actual = middleware.call(
         Stream.fromIterable([action]).asBroadcastStream(),
-        EpicStore<BuiltList<Todo>>(mockStore),
+        EpicStore<AppState>(mockStore),
       );
 
       //Then
@@ -108,7 +106,7 @@ void main() {
 
       Stream<dynamic> actual = middleware.call(
         Stream.fromIterable([action]).asBroadcastStream(),
-        EpicStore<BuiltList<Todo>>(mockStore),
+        EpicStore<AppState>(mockStore),
       );
 
       //Then
@@ -134,7 +132,7 @@ void main() {
 
       Stream<dynamic> actual = middleware.call(
         Stream.fromIterable([action]).asBroadcastStream(),
-        EpicStore<BuiltList<Todo>>(mockStore),
+        EpicStore<AppState>(mockStore),
       );
 
       //Then
