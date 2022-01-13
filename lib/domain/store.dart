@@ -13,6 +13,6 @@ Store<AppState> createStore() {
 
   final epics = combineEpics<AppState>([todoMiddleware]);
 
-  return Store(appReducer,
+  return Store<AppState>(appReducer,
       initialState: AppState.initial(), middleware: [EpicMiddleware(epics)]);
 }
