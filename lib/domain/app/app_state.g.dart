@@ -9,12 +9,15 @@ part of 'app_state.dart';
 class _$AppState extends AppState {
   @override
   final BuiltList<Todo> todosState;
+  @override
+  final BuiltMap<String, Status> statuses;
 
   factory _$AppState([void Function(AppStateBuilder)? updates]) =>
       (new AppStateBuilder()..update(updates)).build();
 
-  _$AppState._({required this.todosState}) : super._() {
+  _$AppState._({required this.todosState, required this.statuses}) : super._() {
     BuiltValueNullFieldError.checkNotNull(todosState, 'AppState', 'todosState');
+    BuiltValueNullFieldError.checkNotNull(statuses, 'AppState', 'statuses');
   }
 
   @override
@@ -27,18 +30,21 @@ class _$AppState extends AppState {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is AppState && todosState == other.todosState;
+    return other is AppState &&
+        todosState == other.todosState &&
+        statuses == other.statuses;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, todosState.hashCode));
+    return $jf($jc($jc(0, todosState.hashCode), statuses.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('AppState')
-          ..add('todosState', todosState))
+          ..add('todosState', todosState)
+          ..add('statuses', statuses))
         .toString();
   }
 }
@@ -52,12 +58,19 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   set todosState(ListBuilder<Todo>? todosState) =>
       _$this._todosState = todosState;
 
+  MapBuilder<String, Status>? _statuses;
+  MapBuilder<String, Status> get statuses =>
+      _$this._statuses ??= new MapBuilder<String, Status>();
+  set statuses(MapBuilder<String, Status>? statuses) =>
+      _$this._statuses = statuses;
+
   AppStateBuilder();
 
   AppStateBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _todosState = $v.todosState.toBuilder();
+      _statuses = $v.statuses.toBuilder();
       _$v = null;
     }
     return this;
@@ -78,12 +91,16 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   _$AppState build() {
     _$AppState _$result;
     try {
-      _$result = _$v ?? new _$AppState._(todosState: todosState.build());
+      _$result = _$v ??
+          new _$AppState._(
+              todosState: todosState.build(), statuses: statuses.build());
     } catch (_) {
       late String _$failedField;
       try {
         _$failedField = 'todosState';
         todosState.build();
+        _$failedField = 'statuses';
+        statuses.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'AppState', _$failedField, e.toString());
