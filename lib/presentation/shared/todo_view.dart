@@ -1,6 +1,7 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:todo_app_redux/data/enum/status.dart';
 import 'package:todo_app_redux/data/model/todo.dart';
 import 'package:todo_app_redux/domain/app/app_state.dart';
 import 'package:todo_app_redux/domain/todo/todo_actions.dart';
@@ -14,19 +15,28 @@ class TodoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, TodoViewModel>(
-      onInit: (store) => store.dispatch(DoReadTodoMiddlewareAction()),
+      distinct: true,
+      onInit: (store) => store.dispatch(DoReadTodoMiddlewareAction((updates) =>
+          updates..statusKey = DoReadTodoMiddlewareAction.createStatusKey())),
       converter: (store) => TodoViewModel(
+          status: store.state
+                  .statuses[DoReadTodoMiddlewareAction.createStatusKey()] ??
+              Status.idle,
           todos: _getTodos(store.state.todosState, isComplete),
           onCheckboxTapped: (todo) {
             final updatedTodo = todo
                 .rebuild((updates) => updates..isComplete = !todo.isComplete);
-            store.dispatch(DoUpdateTodoMiddlewareAction(
-                (updates) => updates..updatedTodo = updatedTodo.toBuilder()));
+            store.dispatch(DoUpdateTodoMiddlewareAction((updates) => updates
+              ..updatedTodo = updatedTodo.toBuilder()
+              ..statusKey =
+                  DoUpdateTodoMiddlewareAction.createStatusKey(todo)));
           },
           onTodoEdited: (todo, name) {
             final updatedTodo = todo.rebuild((updates) => updates..name = name);
-            store.dispatch(DoUpdateTodoMiddlewareAction(
-                (updates) => updates..updatedTodo = updatedTodo.toBuilder()));
+            store.dispatch(DoUpdateTodoMiddlewareAction((updates) => updates
+              ..updatedTodo = updatedTodo.toBuilder()
+              ..statusKey =
+                  DoUpdateTodoMiddlewareAction.createStatusKey(todo)));
           }),
       builder: (context, viewModel) {
         final onTileTapped = (Todo todo) async {

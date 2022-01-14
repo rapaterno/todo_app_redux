@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:todo_app_redux/data/enum/status.dart';
+import 'package:todo_app_redux/domain/app/app_state.dart';
+import 'package:todo_app_redux/domain/todo/todo_actions.dart';
+import 'package:todo_app_redux/presentation/view_models/create_todo_view_model.dart';
 import 'dialog_wrapper.dart';
 
 const saveButtonKey = 'saveButtonKey';
@@ -31,12 +36,36 @@ class CreateTodoDialog extends StatelessWidget {
                   Navigator.pop(context);
                 },
                 child: Text('Close')),
-            ElevatedButton(
-                key: Key(saveButtonKey),
-                onPressed: () {
-                  Navigator.pop(context, _textController.text);
+            StoreConnector<AppState, CreateTodoViewModel>(
+                distinct: true,
+                builder: (context, viewModel) {
+                  Widget child;
+
+                  final status = viewModel.status;
+                  if (status == Status.loading) {
+                    child = CircularProgressIndicator();
+                  } else {
+                    child = Text('Save');
+                  }
+                  return ElevatedButton(
+                      key: Key(saveButtonKey),
+                      onPressed: () {
+                        viewModel.onTodoCreate(_textController.text);
+                        Navigator.pop(context);
+                      },
+                      child: child);
                 },
-                child: Text('Save'))
+                converter: (store) => CreateTodoViewModel(
+                      status: store.state.statuses[
+                              DoCreateMiddlewareTodoAction.createStatusKey()] ??
+                          Status.idle,
+                      onTodoCreate: (String name) => store.dispatch(
+                          DoCreateMiddlewareTodoAction((builder) => builder
+                            ..statusKey =
+                                DoCreateMiddlewareTodoAction.createStatusKey()
+                            ..isComplete = false
+                            ..name = name)),
+                    ))
           ],
         )
       ],

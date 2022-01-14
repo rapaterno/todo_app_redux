@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:todo_app_redux/data/enum/status.dart';
 import 'package:todo_app_redux/data/model/todo.dart';
 import 'package:todo_app_redux/domain/app/app_state.dart';
 import 'package:todo_app_redux/domain/todo/todo_actions.dart';
-import 'package:todo_app_redux/presentation/view_models/delete_todo_view_model.dart';
+import 'package:todo_app_redux/presentation/view_models/edit_todo_view_model.dart';
 import 'dialog_wrapper.dart';
 
 const saveButtonKey = 'saveButtonKey';
@@ -30,30 +31,50 @@ class EditTodoDialog extends StatelessWidget {
         SizedBox(
           height: 20,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            StoreConnector<AppState, DeleteTodoViewModel>(
-                builder: (context, viewModel) {
-                  return ElevatedButton(
+        StoreConnector<AppState, EditTodoViewModel>(
+            distinct: true,
+            builder: (context, viewModel) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton(
                       onPressed: () {
                         viewModel.onTodoDelete(todo);
                         Navigator.pop(context);
                       },
-                      child: Text('Delete'));
-                },
-                converter: (store) => DeleteTodoViewModel(
+                      child: Text('Delete')),
+                  ElevatedButton(
+                      key: Key(saveButtonKey),
+                      onPressed: () {
+                        Navigator.pop(context, _textController.text);
+                      },
+                      child: Text('Save'))
+                ],
+              );
+            },
+            converter: (store) => EditTodoViewModel(
+                    statuses: {
+                      DoUpdateTodoMiddlewareAction.createStatusKey(todo):
+                          store.state.statuses[
+                                  DoUpdateTodoMiddlewareAction.createStatusKey(
+                                      todo)] ??
+                              Status.idle,
+                      DoDeleteTodoMiddlewareAction.createStatusKey(): store
+                                  .state.statuses[
+                              DoDeleteTodoMiddlewareAction.createStatusKey()] ??
+                          Status.idle
+                    },
+                    onTodoUpdate: (updateTodo) => store.dispatch(
+                        DoUpdateTodoMiddlewareAction((builder) => builder
+                          ..updatedTodo = updateTodo.toBuilder()
+                          ..statusKey =
+                              DoUpdateTodoMiddlewareAction.createStatusKey(
+                                  updateTodo))),
                     onTodoDelete: (deleteTodo) => store.dispatch(
-                        DoDeleteTodoMiddlewareAction((builder) =>
-                            builder..deletedTodo = deleteTodo.toBuilder())))),
-            ElevatedButton(
-                key: Key(saveButtonKey),
-                onPressed: () {
-                  Navigator.pop(context, _textController.text);
-                },
-                child: Text('Save'))
-          ],
-        )
+                        DoDeleteTodoMiddlewareAction((builder) => builder
+                          ..deletedTodo = deleteTodo.toBuilder()
+                          ..statusKey =
+                              DoDeleteTodoMiddlewareAction.createStatusKey()))))
       ],
     );
   }
