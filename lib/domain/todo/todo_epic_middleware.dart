@@ -15,7 +15,7 @@ class TodoMiddleware implements EpicClass<AppState> {
   @override
   Stream call(Stream actions, EpicStore<AppState> store) async* {
     await for (final action in actions) {
-      if (action is DoCreateTodoAction) {
+      if (action is DoCreateMiddlewareTodoAction) {
         final todo = Todo((b) => b
           ..id = _uuidProvider.generateUuid()
           ..name = action.name
@@ -28,7 +28,7 @@ class TodoMiddleware implements EpicClass<AppState> {
           yield ErrorCreateTodoAction(
               (updates) => updates..error = e.toString());
         }
-      } else if (action is DoReadTodoAction) {
+      } else if (action is DoReadTodoMiddlewareAction) {
         try {
           final todos = await _todoRepository.read();
           yield SuccessReadTodoAction(
@@ -36,7 +36,7 @@ class TodoMiddleware implements EpicClass<AppState> {
         } catch (e) {
           //TODO: Add ErrorAction
         }
-      } else if (action is DoUpdateTodoAction) {
+      } else if (action is DoUpdateTodoMiddlewareAction) {
         try {
           await _todoRepository.update(action.updatedTodo);
           yield SuccessUpdateTodoAction((updates) =>
@@ -44,7 +44,7 @@ class TodoMiddleware implements EpicClass<AppState> {
         } catch (e) {
           //TODO: Add ErrorAction
         }
-      } else if (action is DoDeleteTodoAction) {
+      } else if (action is DoDeleteTodoMiddlewareAction) {
         try {
           await _todoRepository.delete(action.deletedTodo);
           yield SuccessDeleteTodoAction((updates) =>

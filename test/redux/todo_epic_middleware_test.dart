@@ -36,7 +36,7 @@ void main() {
 
   group('TodoMiddleware', () {
     test(
-        'should respond SuccessCreateTodoAction in response to DoCreateTodoAction',
+        'should respond SuccessCreateTodoAction in response to DoCreateMiddlewareTodoAction',
         () async {
       // Given
       final todo = Todo((todo) => todo
@@ -44,7 +44,7 @@ void main() {
         ..name = 'Todo 1'
         ..isComplete = false);
 
-      final action = DoCreateTodoAction((updates) => updates
+      final action = DoCreateMiddlewareTodoAction((updates) => updates
         ..name = todo.name
         ..isComplete = todo.isComplete);
 
@@ -74,7 +74,7 @@ void main() {
         ..name = 'Todo 1'
         ..isComplete = false);
 
-      final action = DoCreateTodoAction((updates) => updates
+      final action = DoCreateMiddlewareTodoAction((updates) => updates
         ..name = todo.name
         ..isComplete = todo.isComplete);
 
@@ -98,7 +98,7 @@ void main() {
         () async {
       // Given
 
-      final action = DoReadTodoAction((updates) => updates);
+      final action = DoReadTodoMiddlewareAction((updates) => updates);
 
       // When
       when(mockRepository.read())
@@ -123,7 +123,7 @@ void main() {
       final modifiedTodoBuilder = mockTodos[1].toBuilder();
       modifiedTodoBuilder.isComplete = !mockTodos[1].isComplete;
 
-      final action = DoUpdateTodoAction(
+      final action = DoUpdateTodoMiddlewareAction(
           (updates) => updates..updatedTodo = modifiedTodoBuilder);
 
       // When
@@ -143,12 +143,12 @@ void main() {
     });
 
     test(
-        'should respond SuccessDeleteTodoAction in response to DoDeleteTodoAction',
+        'should respond SuccessDeleteTodoAction in response to DoDeleteTodoMiddlewareAction',
         () async {
       //Given
       final deletedTodo = mockTodos[1].toBuilder();
-      final action =
-          DoDeleteTodoAction((updates) => updates..deletedTodo = deletedTodo);
+      final action = DoDeleteTodoMiddlewareAction(
+          (updates) => updates..deletedTodo = deletedTodo);
 
       // When
       when(mockRepository.delete(deletedTodo.build()))

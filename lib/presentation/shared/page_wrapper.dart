@@ -33,9 +33,10 @@ class PageWrapper extends StatelessWidget {
       StoreConnector<AppState, PageWrapperViewModel>(
           converter: (store) => PageWrapperViewModel(
                 onTodoCreated: (name) {
-                  store.dispatch(DoCreateTodoAction((builder) => builder
-                    ..isComplete = false
-                    ..name = name));
+                  store.dispatch(
+                      DoCreateMiddlewareTodoAction((builder) => builder
+                        ..isComplete = false
+                        ..name = name));
                 },
               ),
           builder: (context, viewModel) {

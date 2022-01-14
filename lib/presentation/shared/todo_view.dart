@@ -14,18 +14,18 @@ class TodoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, TodoViewModel>(
-      onInit: (store) => store.dispatch(DoReadTodoAction()),
+      onInit: (store) => store.dispatch(DoReadTodoMiddlewareAction()),
       converter: (store) => TodoViewModel(
           todos: _getTodos(store.state.todosState, isComplete),
           onCheckboxTapped: (todo) {
             final updatedTodo = todo
                 .rebuild((updates) => updates..isComplete = !todo.isComplete);
-            store.dispatch(DoUpdateTodoAction(
+            store.dispatch(DoUpdateTodoMiddlewareAction(
                 (updates) => updates..updatedTodo = updatedTodo.toBuilder()));
           },
           onTodoEdited: (todo, name) {
             final updatedTodo = todo.rebuild((updates) => updates..name = name);
-            store.dispatch(DoUpdateTodoAction(
+            store.dispatch(DoUpdateTodoMiddlewareAction(
                 (updates) => updates..updatedTodo = updatedTodo.toBuilder()));
           }),
       builder: (context, viewModel) {

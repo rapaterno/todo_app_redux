@@ -6,36 +6,38 @@ part of 'todo_actions.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-class _$DoCreateTodoAction extends DoCreateTodoAction {
+class _$DoCreateMiddlewareTodoAction extends DoCreateMiddlewareTodoAction {
   @override
   final String name;
   @override
   final bool isComplete;
 
-  factory _$DoCreateTodoAction(
-          [void Function(DoCreateTodoActionBuilder)? updates]) =>
-      (new DoCreateTodoActionBuilder()..update(updates)).build();
+  factory _$DoCreateMiddlewareTodoAction(
+          [void Function(DoCreateMiddlewareTodoActionBuilder)? updates]) =>
+      (new DoCreateMiddlewareTodoActionBuilder()..update(updates)).build();
 
-  _$DoCreateTodoAction._({required this.name, required this.isComplete})
+  _$DoCreateMiddlewareTodoAction._(
+      {required this.name, required this.isComplete})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(name, 'DoCreateTodoAction', 'name');
     BuiltValueNullFieldError.checkNotNull(
-        isComplete, 'DoCreateTodoAction', 'isComplete');
+        name, 'DoCreateMiddlewareTodoAction', 'name');
+    BuiltValueNullFieldError.checkNotNull(
+        isComplete, 'DoCreateMiddlewareTodoAction', 'isComplete');
   }
 
   @override
-  DoCreateTodoAction rebuild(
-          void Function(DoCreateTodoActionBuilder) updates) =>
+  DoCreateMiddlewareTodoAction rebuild(
+          void Function(DoCreateMiddlewareTodoActionBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  DoCreateTodoActionBuilder toBuilder() =>
-      new DoCreateTodoActionBuilder()..replace(this);
+  DoCreateMiddlewareTodoActionBuilder toBuilder() =>
+      new DoCreateMiddlewareTodoActionBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is DoCreateTodoAction &&
+    return other is DoCreateMiddlewareTodoAction &&
         name == other.name &&
         isComplete == other.isComplete;
   }
@@ -47,16 +49,18 @@ class _$DoCreateTodoAction extends DoCreateTodoAction {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('DoCreateTodoAction')
+    return (newBuiltValueToStringHelper('DoCreateMiddlewareTodoAction')
           ..add('name', name)
           ..add('isComplete', isComplete))
         .toString();
   }
 }
 
-class DoCreateTodoActionBuilder
-    implements Builder<DoCreateTodoAction, DoCreateTodoActionBuilder> {
-  _$DoCreateTodoAction? _$v;
+class DoCreateMiddlewareTodoActionBuilder
+    implements
+        Builder<DoCreateMiddlewareTodoAction,
+            DoCreateMiddlewareTodoActionBuilder> {
+  _$DoCreateMiddlewareTodoAction? _$v;
 
   String? _name;
   String? get name => _$this._name;
@@ -66,9 +70,9 @@ class DoCreateTodoActionBuilder
   bool? get isComplete => _$this._isComplete;
   set isComplete(bool? isComplete) => _$this._isComplete = isComplete;
 
-  DoCreateTodoActionBuilder();
+  DoCreateMiddlewareTodoActionBuilder();
 
-  DoCreateTodoActionBuilder get _$this {
+  DoCreateMiddlewareTodoActionBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _name = $v.name;
@@ -79,24 +83,24 @@ class DoCreateTodoActionBuilder
   }
 
   @override
-  void replace(DoCreateTodoAction other) {
+  void replace(DoCreateMiddlewareTodoAction other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$DoCreateTodoAction;
+    _$v = other as _$DoCreateMiddlewareTodoAction;
   }
 
   @override
-  void update(void Function(DoCreateTodoActionBuilder)? updates) {
+  void update(void Function(DoCreateMiddlewareTodoActionBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$DoCreateTodoAction build() {
+  _$DoCreateMiddlewareTodoAction build() {
     final _$result = _$v ??
-        new _$DoCreateTodoAction._(
+        new _$DoCreateMiddlewareTodoAction._(
             name: BuiltValueNullFieldError.checkNotNull(
-                name, 'DoCreateTodoAction', 'name'),
+                name, 'DoCreateMiddlewareTodoAction', 'name'),
             isComplete: BuiltValueNullFieldError.checkNotNull(
-                isComplete, 'DoCreateTodoAction', 'isComplete'));
+                isComplete, 'DoCreateMiddlewareTodoAction', 'isComplete'));
     replace(_$result);
     return _$result;
   }
@@ -277,58 +281,60 @@ class ErrorCreateTodoActionBuilder
   }
 }
 
-class _$DoReadTodoAction extends DoReadTodoAction {
-  factory _$DoReadTodoAction(
-          [void Function(DoReadTodoActionBuilder)? updates]) =>
-      (new DoReadTodoActionBuilder()..update(updates)).build();
+class _$DoReadTodoMiddlewareAction extends DoReadTodoMiddlewareAction {
+  factory _$DoReadTodoMiddlewareAction(
+          [void Function(DoReadTodoMiddlewareActionBuilder)? updates]) =>
+      (new DoReadTodoMiddlewareActionBuilder()..update(updates)).build();
 
-  _$DoReadTodoAction._() : super._();
+  _$DoReadTodoMiddlewareAction._() : super._();
 
   @override
-  DoReadTodoAction rebuild(void Function(DoReadTodoActionBuilder) updates) =>
+  DoReadTodoMiddlewareAction rebuild(
+          void Function(DoReadTodoMiddlewareActionBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  DoReadTodoActionBuilder toBuilder() =>
-      new DoReadTodoActionBuilder()..replace(this);
+  DoReadTodoMiddlewareActionBuilder toBuilder() =>
+      new DoReadTodoMiddlewareActionBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is DoReadTodoAction;
+    return other is DoReadTodoMiddlewareAction;
   }
 
   @override
   int get hashCode {
-    return 588908073;
+    return 337408827;
   }
 
   @override
   String toString() {
-    return newBuiltValueToStringHelper('DoReadTodoAction').toString();
+    return newBuiltValueToStringHelper('DoReadTodoMiddlewareAction').toString();
   }
 }
 
-class DoReadTodoActionBuilder
-    implements Builder<DoReadTodoAction, DoReadTodoActionBuilder> {
-  _$DoReadTodoAction? _$v;
+class DoReadTodoMiddlewareActionBuilder
+    implements
+        Builder<DoReadTodoMiddlewareAction, DoReadTodoMiddlewareActionBuilder> {
+  _$DoReadTodoMiddlewareAction? _$v;
 
-  DoReadTodoActionBuilder();
+  DoReadTodoMiddlewareActionBuilder();
 
   @override
-  void replace(DoReadTodoAction other) {
+  void replace(DoReadTodoMiddlewareAction other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$DoReadTodoAction;
+    _$v = other as _$DoReadTodoMiddlewareAction;
   }
 
   @override
-  void update(void Function(DoReadTodoActionBuilder)? updates) {
+  void update(void Function(DoReadTodoMiddlewareActionBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$DoReadTodoAction build() {
-    final _$result = _$v ?? new _$DoReadTodoAction._();
+  _$DoReadTodoMiddlewareAction build() {
+    final _$result = _$v ?? new _$DoReadTodoMiddlewareAction._();
     replace(_$result);
     return _$result;
   }
@@ -426,32 +432,33 @@ class SuccessReadTodoActionBuilder
   }
 }
 
-class _$DoUpdateTodoAction extends DoUpdateTodoAction {
+class _$DoUpdateTodoMiddlewareAction extends DoUpdateTodoMiddlewareAction {
   @override
   final Todo updatedTodo;
 
-  factory _$DoUpdateTodoAction(
-          [void Function(DoUpdateTodoActionBuilder)? updates]) =>
-      (new DoUpdateTodoActionBuilder()..update(updates)).build();
+  factory _$DoUpdateTodoMiddlewareAction(
+          [void Function(DoUpdateTodoMiddlewareActionBuilder)? updates]) =>
+      (new DoUpdateTodoMiddlewareActionBuilder()..update(updates)).build();
 
-  _$DoUpdateTodoAction._({required this.updatedTodo}) : super._() {
+  _$DoUpdateTodoMiddlewareAction._({required this.updatedTodo}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        updatedTodo, 'DoUpdateTodoAction', 'updatedTodo');
+        updatedTodo, 'DoUpdateTodoMiddlewareAction', 'updatedTodo');
   }
 
   @override
-  DoUpdateTodoAction rebuild(
-          void Function(DoUpdateTodoActionBuilder) updates) =>
+  DoUpdateTodoMiddlewareAction rebuild(
+          void Function(DoUpdateTodoMiddlewareActionBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  DoUpdateTodoActionBuilder toBuilder() =>
-      new DoUpdateTodoActionBuilder()..replace(this);
+  DoUpdateTodoMiddlewareActionBuilder toBuilder() =>
+      new DoUpdateTodoMiddlewareActionBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is DoUpdateTodoAction && updatedTodo == other.updatedTodo;
+    return other is DoUpdateTodoMiddlewareAction &&
+        updatedTodo == other.updatedTodo;
   }
 
   @override
@@ -461,24 +468,26 @@ class _$DoUpdateTodoAction extends DoUpdateTodoAction {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('DoUpdateTodoAction')
+    return (newBuiltValueToStringHelper('DoUpdateTodoMiddlewareAction')
           ..add('updatedTodo', updatedTodo))
         .toString();
   }
 }
 
-class DoUpdateTodoActionBuilder
-    implements Builder<DoUpdateTodoAction, DoUpdateTodoActionBuilder> {
-  _$DoUpdateTodoAction? _$v;
+class DoUpdateTodoMiddlewareActionBuilder
+    implements
+        Builder<DoUpdateTodoMiddlewareAction,
+            DoUpdateTodoMiddlewareActionBuilder> {
+  _$DoUpdateTodoMiddlewareAction? _$v;
 
   TodoBuilder? _updatedTodo;
   TodoBuilder get updatedTodo => _$this._updatedTodo ??= new TodoBuilder();
   set updatedTodo(TodoBuilder? updatedTodo) =>
       _$this._updatedTodo = updatedTodo;
 
-  DoUpdateTodoActionBuilder();
+  DoUpdateTodoMiddlewareActionBuilder();
 
-  DoUpdateTodoActionBuilder get _$this {
+  DoUpdateTodoMiddlewareActionBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _updatedTodo = $v.updatedTodo.toBuilder();
@@ -488,22 +497,23 @@ class DoUpdateTodoActionBuilder
   }
 
   @override
-  void replace(DoUpdateTodoAction other) {
+  void replace(DoUpdateTodoMiddlewareAction other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$DoUpdateTodoAction;
+    _$v = other as _$DoUpdateTodoMiddlewareAction;
   }
 
   @override
-  void update(void Function(DoUpdateTodoActionBuilder)? updates) {
+  void update(void Function(DoUpdateTodoMiddlewareActionBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$DoUpdateTodoAction build() {
-    _$DoUpdateTodoAction _$result;
+  _$DoUpdateTodoMiddlewareAction build() {
+    _$DoUpdateTodoMiddlewareAction _$result;
     try {
-      _$result =
-          _$v ?? new _$DoUpdateTodoAction._(updatedTodo: updatedTodo.build());
+      _$result = _$v ??
+          new _$DoUpdateTodoMiddlewareAction._(
+              updatedTodo: updatedTodo.build());
     } catch (_) {
       late String _$failedField;
       try {
@@ -511,7 +521,7 @@ class DoUpdateTodoActionBuilder
         updatedTodo.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'DoUpdateTodoAction', _$failedField, e.toString());
+            'DoUpdateTodoMiddlewareAction', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -615,32 +625,33 @@ class SuccessUpdateTodoActionBuilder
   }
 }
 
-class _$DoDeleteTodoAction extends DoDeleteTodoAction {
+class _$DoDeleteTodoMiddlewareAction extends DoDeleteTodoMiddlewareAction {
   @override
   final Todo deletedTodo;
 
-  factory _$DoDeleteTodoAction(
-          [void Function(DoDeleteTodoActionBuilder)? updates]) =>
-      (new DoDeleteTodoActionBuilder()..update(updates)).build();
+  factory _$DoDeleteTodoMiddlewareAction(
+          [void Function(DoDeleteTodoMiddlewareActionBuilder)? updates]) =>
+      (new DoDeleteTodoMiddlewareActionBuilder()..update(updates)).build();
 
-  _$DoDeleteTodoAction._({required this.deletedTodo}) : super._() {
+  _$DoDeleteTodoMiddlewareAction._({required this.deletedTodo}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        deletedTodo, 'DoDeleteTodoAction', 'deletedTodo');
+        deletedTodo, 'DoDeleteTodoMiddlewareAction', 'deletedTodo');
   }
 
   @override
-  DoDeleteTodoAction rebuild(
-          void Function(DoDeleteTodoActionBuilder) updates) =>
+  DoDeleteTodoMiddlewareAction rebuild(
+          void Function(DoDeleteTodoMiddlewareActionBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  DoDeleteTodoActionBuilder toBuilder() =>
-      new DoDeleteTodoActionBuilder()..replace(this);
+  DoDeleteTodoMiddlewareActionBuilder toBuilder() =>
+      new DoDeleteTodoMiddlewareActionBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is DoDeleteTodoAction && deletedTodo == other.deletedTodo;
+    return other is DoDeleteTodoMiddlewareAction &&
+        deletedTodo == other.deletedTodo;
   }
 
   @override
@@ -650,24 +661,26 @@ class _$DoDeleteTodoAction extends DoDeleteTodoAction {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('DoDeleteTodoAction')
+    return (newBuiltValueToStringHelper('DoDeleteTodoMiddlewareAction')
           ..add('deletedTodo', deletedTodo))
         .toString();
   }
 }
 
-class DoDeleteTodoActionBuilder
-    implements Builder<DoDeleteTodoAction, DoDeleteTodoActionBuilder> {
-  _$DoDeleteTodoAction? _$v;
+class DoDeleteTodoMiddlewareActionBuilder
+    implements
+        Builder<DoDeleteTodoMiddlewareAction,
+            DoDeleteTodoMiddlewareActionBuilder> {
+  _$DoDeleteTodoMiddlewareAction? _$v;
 
   TodoBuilder? _deletedTodo;
   TodoBuilder get deletedTodo => _$this._deletedTodo ??= new TodoBuilder();
   set deletedTodo(TodoBuilder? deletedTodo) =>
       _$this._deletedTodo = deletedTodo;
 
-  DoDeleteTodoActionBuilder();
+  DoDeleteTodoMiddlewareActionBuilder();
 
-  DoDeleteTodoActionBuilder get _$this {
+  DoDeleteTodoMiddlewareActionBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _deletedTodo = $v.deletedTodo.toBuilder();
@@ -677,22 +690,23 @@ class DoDeleteTodoActionBuilder
   }
 
   @override
-  void replace(DoDeleteTodoAction other) {
+  void replace(DoDeleteTodoMiddlewareAction other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$DoDeleteTodoAction;
+    _$v = other as _$DoDeleteTodoMiddlewareAction;
   }
 
   @override
-  void update(void Function(DoDeleteTodoActionBuilder)? updates) {
+  void update(void Function(DoDeleteTodoMiddlewareActionBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$DoDeleteTodoAction build() {
-    _$DoDeleteTodoAction _$result;
+  _$DoDeleteTodoMiddlewareAction build() {
+    _$DoDeleteTodoMiddlewareAction _$result;
     try {
-      _$result =
-          _$v ?? new _$DoDeleteTodoAction._(deletedTodo: deletedTodo.build());
+      _$result = _$v ??
+          new _$DoDeleteTodoMiddlewareAction._(
+              deletedTodo: deletedTodo.build());
     } catch (_) {
       late String _$failedField;
       try {
@@ -700,7 +714,7 @@ class DoDeleteTodoActionBuilder
         deletedTodo.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'DoDeleteTodoAction', _$failedField, e.toString());
+            'DoDeleteTodoMiddlewareAction', _$failedField, e.toString());
       }
       rethrow;
     }

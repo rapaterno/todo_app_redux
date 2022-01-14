@@ -5,15 +5,17 @@ import 'package:todo_app_redux/data/model/todo.dart';
 
 part 'todo_actions.g.dart';
 
-abstract class DoCreateTodoAction
-    implements Built<DoCreateTodoAction, DoCreateTodoActionBuilder> {
+abstract class DoCreateMiddlewareTodoAction
+    implements
+        Built<DoCreateMiddlewareTodoAction,
+            DoCreateMiddlewareTodoActionBuilder> {
   String get name;
   bool get isComplete;
-  DoCreateTodoAction._();
+  DoCreateMiddlewareTodoAction._();
 
-  factory DoCreateTodoAction(
-          [void Function(DoCreateTodoActionBuilder) updates]) =
-      _$DoCreateTodoAction;
+  factory DoCreateMiddlewareTodoAction(
+          [void Function(DoCreateMiddlewareTodoActionBuilder) updates]) =
+      _$DoCreateMiddlewareTodoAction;
 }
 
 abstract class SuccessCreateTodoAction
@@ -39,12 +41,14 @@ abstract class ErrorCreateTodoAction
       _$ErrorCreateTodoAction;
 }
 
-abstract class DoReadTodoAction
-    implements Built<DoReadTodoAction, DoReadTodoActionBuilder> {
-  DoReadTodoAction._();
+abstract class DoReadTodoMiddlewareAction
+    implements
+        Built<DoReadTodoMiddlewareAction, DoReadTodoMiddlewareActionBuilder> {
+  DoReadTodoMiddlewareAction._();
 
-  factory DoReadTodoAction([void Function(DoReadTodoActionBuilder) updates]) =
-      _$DoReadTodoAction;
+  factory DoReadTodoMiddlewareAction(
+          [void Function(DoReadTodoMiddlewareActionBuilder) updates]) =
+      _$DoReadTodoMiddlewareAction;
 }
 
 abstract class SuccessReadTodoAction
@@ -58,15 +62,17 @@ abstract class SuccessReadTodoAction
       _$SuccessReadTodoAction;
 }
 
-abstract class DoUpdateTodoAction
-    implements Built<DoUpdateTodoAction, DoUpdateTodoActionBuilder> {
+abstract class DoUpdateTodoMiddlewareAction
+    implements
+        Built<DoUpdateTodoMiddlewareAction,
+            DoUpdateTodoMiddlewareActionBuilder> {
   // Fields
   Todo get updatedTodo;
-  DoUpdateTodoAction._();
+  DoUpdateTodoMiddlewareAction._();
 
-  factory DoUpdateTodoAction(
-          [void Function(DoUpdateTodoActionBuilder) updates]) =
-      _$DoUpdateTodoAction;
+  factory DoUpdateTodoMiddlewareAction(
+          [void Function(DoUpdateTodoMiddlewareActionBuilder) updates]) =
+      _$DoUpdateTodoMiddlewareAction;
 }
 
 abstract class SuccessUpdateTodoAction
@@ -80,16 +86,18 @@ abstract class SuccessUpdateTodoAction
       _$SuccessUpdateTodoAction;
 }
 
-abstract class DoDeleteTodoAction
-    implements Built<DoDeleteTodoAction, DoDeleteTodoActionBuilder> {
+abstract class DoDeleteTodoMiddlewareAction
+    implements
+        Built<DoDeleteTodoMiddlewareAction,
+            DoDeleteTodoMiddlewareActionBuilder> {
   // Fields
   Todo get deletedTodo;
 
-  DoDeleteTodoAction._();
+  DoDeleteTodoMiddlewareAction._();
 
-  factory DoDeleteTodoAction(
-          [void Function(DoDeleteTodoActionBuilder) updates]) =
-      _$DoDeleteTodoAction;
+  factory DoDeleteTodoMiddlewareAction(
+          [void Function(DoDeleteTodoMiddlewareActionBuilder) updates]) =
+      _$DoDeleteTodoMiddlewareAction;
 }
 
 abstract class SuccessDeleteTodoAction

@@ -44,7 +44,7 @@ class EditTodoDialog extends StatelessWidget {
                 },
                 converter: (store) => DeleteTodoViewModel(
                     onTodoDelete: (deleteTodo) => store.dispatch(
-                        DoDeleteTodoAction((builder) =>
+                        DoDeleteTodoMiddlewareAction((builder) =>
                             builder..deletedTodo = deleteTodo.toBuilder())))),
             ElevatedButton(
                 key: Key(saveButtonKey),
