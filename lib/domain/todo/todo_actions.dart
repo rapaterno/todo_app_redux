@@ -5,10 +5,18 @@ import 'package:todo_app_redux/data/model/todo.dart';
 
 part 'todo_actions.g.dart';
 
+abstract class TodoAction {}
+
 abstract class DoCreateMiddlewareTodoAction
     implements
         Built<DoCreateMiddlewareTodoAction,
-            DoCreateMiddlewareTodoActionBuilder> {
+            DoCreateMiddlewareTodoActionBuilder>,
+        TodoAction {
+  static String createStatusKey() {
+    return 'DoCreateMiddlewareTodoAction';
+  }
+
+  String get statusKey;
   String get name;
   bool get isComplete;
   DoCreateMiddlewareTodoAction._();
@@ -19,8 +27,9 @@ abstract class DoCreateMiddlewareTodoAction
 }
 
 abstract class SuccessCreateTodoAction
-    implements Built<SuccessCreateTodoAction, SuccessCreateTodoActionBuilder> {
-  // Fields
+    implements
+        Built<SuccessCreateTodoAction, SuccessCreateTodoActionBuilder>,
+        TodoAction {
   Todo get todo;
 
   SuccessCreateTodoAction._();
@@ -31,7 +40,9 @@ abstract class SuccessCreateTodoAction
 }
 
 abstract class ErrorCreateTodoAction
-    implements Built<ErrorCreateTodoAction, ErrorCreateTodoActionBuilder> {
+    implements
+        Built<ErrorCreateTodoAction, ErrorCreateTodoActionBuilder>,
+        TodoAction {
   String get error;
 
   ErrorCreateTodoAction._();
@@ -43,16 +54,23 @@ abstract class ErrorCreateTodoAction
 
 abstract class DoReadTodoMiddlewareAction
     implements
-        Built<DoReadTodoMiddlewareAction, DoReadTodoMiddlewareActionBuilder> {
+        Built<DoReadTodoMiddlewareAction, DoReadTodoMiddlewareActionBuilder>,
+        TodoAction {
   DoReadTodoMiddlewareAction._();
+  static String createStatusKey() {
+    return 'DoReadTodoMiddlewareAction';
+  }
 
+  String get statusKey;
   factory DoReadTodoMiddlewareAction(
           [void Function(DoReadTodoMiddlewareActionBuilder) updates]) =
       _$DoReadTodoMiddlewareAction;
 }
 
 abstract class SuccessReadTodoAction
-    implements Built<SuccessReadTodoAction, SuccessReadTodoActionBuilder> {
+    implements
+        Built<SuccessReadTodoAction, SuccessReadTodoActionBuilder>,
+        TodoAction {
   // Fields
   BuiltList<Todo> get todos;
   SuccessReadTodoAction._();
@@ -65,8 +83,13 @@ abstract class SuccessReadTodoAction
 abstract class DoUpdateTodoMiddlewareAction
     implements
         Built<DoUpdateTodoMiddlewareAction,
-            DoUpdateTodoMiddlewareActionBuilder> {
-  // Fields
+            DoUpdateTodoMiddlewareActionBuilder>,
+        TodoAction {
+  static String createStatusKey(Todo todo) {
+    return 'DoUpdateTodoMiddlewareAction' + todo.id.toString();
+  }
+
+  String get statusKey;
   Todo get updatedTodo;
   DoUpdateTodoMiddlewareAction._();
 
@@ -76,7 +99,9 @@ abstract class DoUpdateTodoMiddlewareAction
 }
 
 abstract class SuccessUpdateTodoAction
-    implements Built<SuccessUpdateTodoAction, SuccessUpdateTodoActionBuilder> {
+    implements
+        Built<SuccessUpdateTodoAction, SuccessUpdateTodoActionBuilder>,
+        TodoAction {
   Todo get updatedTodo;
 
   SuccessUpdateTodoAction._();
@@ -89,8 +114,13 @@ abstract class SuccessUpdateTodoAction
 abstract class DoDeleteTodoMiddlewareAction
     implements
         Built<DoDeleteTodoMiddlewareAction,
-            DoDeleteTodoMiddlewareActionBuilder> {
-  // Fields
+            DoDeleteTodoMiddlewareActionBuilder>,
+        TodoAction {
+  static String createStatusKey() {
+    return 'DoDeleteTodoMiddlewareAction';
+  }
+
+  String get statusKey;
   Todo get deletedTodo;
 
   DoDeleteTodoMiddlewareAction._();
@@ -101,7 +131,9 @@ abstract class DoDeleteTodoMiddlewareAction
 }
 
 abstract class SuccessDeleteTodoAction
-    implements Built<SuccessDeleteTodoAction, SuccessDeleteTodoActionBuilder> {
+    implements
+        Built<SuccessDeleteTodoAction, SuccessDeleteTodoActionBuilder>,
+        TodoAction {
   // Fields
   Todo get deletedTodo;
 
@@ -113,7 +145,9 @@ abstract class SuccessDeleteTodoAction
 }
 
 abstract class SetTodoStatusAction
-    implements Built<SetTodoStatusAction, SetTodoStatusActionBuilder> {
+    implements
+        Built<SetTodoStatusAction, SetTodoStatusActionBuilder>,
+        TodoAction {
   // Fields
   Status get status;
   String get statusKey;

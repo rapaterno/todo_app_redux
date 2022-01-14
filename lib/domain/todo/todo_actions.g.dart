@@ -8,6 +8,8 @@ part of 'todo_actions.dart';
 
 class _$DoCreateMiddlewareTodoAction extends DoCreateMiddlewareTodoAction {
   @override
+  final String statusKey;
+  @override
   final String name;
   @override
   final bool isComplete;
@@ -17,8 +19,10 @@ class _$DoCreateMiddlewareTodoAction extends DoCreateMiddlewareTodoAction {
       (new DoCreateMiddlewareTodoActionBuilder()..update(updates)).build();
 
   _$DoCreateMiddlewareTodoAction._(
-      {required this.name, required this.isComplete})
+      {required this.statusKey, required this.name, required this.isComplete})
       : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        statusKey, 'DoCreateMiddlewareTodoAction', 'statusKey');
     BuiltValueNullFieldError.checkNotNull(
         name, 'DoCreateMiddlewareTodoAction', 'name');
     BuiltValueNullFieldError.checkNotNull(
@@ -38,18 +42,21 @@ class _$DoCreateMiddlewareTodoAction extends DoCreateMiddlewareTodoAction {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is DoCreateMiddlewareTodoAction &&
+        statusKey == other.statusKey &&
         name == other.name &&
         isComplete == other.isComplete;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, name.hashCode), isComplete.hashCode));
+    return $jf($jc(
+        $jc($jc(0, statusKey.hashCode), name.hashCode), isComplete.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('DoCreateMiddlewareTodoAction')
+          ..add('statusKey', statusKey)
           ..add('name', name)
           ..add('isComplete', isComplete))
         .toString();
@@ -61,6 +68,10 @@ class DoCreateMiddlewareTodoActionBuilder
         Builder<DoCreateMiddlewareTodoAction,
             DoCreateMiddlewareTodoActionBuilder> {
   _$DoCreateMiddlewareTodoAction? _$v;
+
+  String? _statusKey;
+  String? get statusKey => _$this._statusKey;
+  set statusKey(String? statusKey) => _$this._statusKey = statusKey;
 
   String? _name;
   String? get name => _$this._name;
@@ -75,6 +86,7 @@ class DoCreateMiddlewareTodoActionBuilder
   DoCreateMiddlewareTodoActionBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _statusKey = $v.statusKey;
       _name = $v.name;
       _isComplete = $v.isComplete;
       _$v = null;
@@ -97,6 +109,8 @@ class DoCreateMiddlewareTodoActionBuilder
   _$DoCreateMiddlewareTodoAction build() {
     final _$result = _$v ??
         new _$DoCreateMiddlewareTodoAction._(
+            statusKey: BuiltValueNullFieldError.checkNotNull(
+                statusKey, 'DoCreateMiddlewareTodoAction', 'statusKey'),
             name: BuiltValueNullFieldError.checkNotNull(
                 name, 'DoCreateMiddlewareTodoAction', 'name'),
             isComplete: BuiltValueNullFieldError.checkNotNull(
@@ -282,11 +296,17 @@ class ErrorCreateTodoActionBuilder
 }
 
 class _$DoReadTodoMiddlewareAction extends DoReadTodoMiddlewareAction {
+  @override
+  final String statusKey;
+
   factory _$DoReadTodoMiddlewareAction(
           [void Function(DoReadTodoMiddlewareActionBuilder)? updates]) =>
       (new DoReadTodoMiddlewareActionBuilder()..update(updates)).build();
 
-  _$DoReadTodoMiddlewareAction._() : super._();
+  _$DoReadTodoMiddlewareAction._({required this.statusKey}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        statusKey, 'DoReadTodoMiddlewareAction', 'statusKey');
+  }
 
   @override
   DoReadTodoMiddlewareAction rebuild(
@@ -300,17 +320,19 @@ class _$DoReadTodoMiddlewareAction extends DoReadTodoMiddlewareAction {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is DoReadTodoMiddlewareAction;
+    return other is DoReadTodoMiddlewareAction && statusKey == other.statusKey;
   }
 
   @override
   int get hashCode {
-    return 337408827;
+    return $jf($jc(0, statusKey.hashCode));
   }
 
   @override
   String toString() {
-    return newBuiltValueToStringHelper('DoReadTodoMiddlewareAction').toString();
+    return (newBuiltValueToStringHelper('DoReadTodoMiddlewareAction')
+          ..add('statusKey', statusKey))
+        .toString();
   }
 }
 
@@ -319,7 +341,20 @@ class DoReadTodoMiddlewareActionBuilder
         Builder<DoReadTodoMiddlewareAction, DoReadTodoMiddlewareActionBuilder> {
   _$DoReadTodoMiddlewareAction? _$v;
 
+  String? _statusKey;
+  String? get statusKey => _$this._statusKey;
+  set statusKey(String? statusKey) => _$this._statusKey = statusKey;
+
   DoReadTodoMiddlewareActionBuilder();
+
+  DoReadTodoMiddlewareActionBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _statusKey = $v.statusKey;
+      _$v = null;
+    }
+    return this;
+  }
 
   @override
   void replace(DoReadTodoMiddlewareAction other) {
@@ -334,7 +369,10 @@ class DoReadTodoMiddlewareActionBuilder
 
   @override
   _$DoReadTodoMiddlewareAction build() {
-    final _$result = _$v ?? new _$DoReadTodoMiddlewareAction._();
+    final _$result = _$v ??
+        new _$DoReadTodoMiddlewareAction._(
+            statusKey: BuiltValueNullFieldError.checkNotNull(
+                statusKey, 'DoReadTodoMiddlewareAction', 'statusKey'));
     replace(_$result);
     return _$result;
   }
@@ -434,13 +472,19 @@ class SuccessReadTodoActionBuilder
 
 class _$DoUpdateTodoMiddlewareAction extends DoUpdateTodoMiddlewareAction {
   @override
+  final String statusKey;
+  @override
   final Todo updatedTodo;
 
   factory _$DoUpdateTodoMiddlewareAction(
           [void Function(DoUpdateTodoMiddlewareActionBuilder)? updates]) =>
       (new DoUpdateTodoMiddlewareActionBuilder()..update(updates)).build();
 
-  _$DoUpdateTodoMiddlewareAction._({required this.updatedTodo}) : super._() {
+  _$DoUpdateTodoMiddlewareAction._(
+      {required this.statusKey, required this.updatedTodo})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        statusKey, 'DoUpdateTodoMiddlewareAction', 'statusKey');
     BuiltValueNullFieldError.checkNotNull(
         updatedTodo, 'DoUpdateTodoMiddlewareAction', 'updatedTodo');
   }
@@ -458,17 +502,19 @@ class _$DoUpdateTodoMiddlewareAction extends DoUpdateTodoMiddlewareAction {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is DoUpdateTodoMiddlewareAction &&
+        statusKey == other.statusKey &&
         updatedTodo == other.updatedTodo;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, updatedTodo.hashCode));
+    return $jf($jc($jc(0, statusKey.hashCode), updatedTodo.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('DoUpdateTodoMiddlewareAction')
+          ..add('statusKey', statusKey)
           ..add('updatedTodo', updatedTodo))
         .toString();
   }
@@ -480,6 +526,10 @@ class DoUpdateTodoMiddlewareActionBuilder
             DoUpdateTodoMiddlewareActionBuilder> {
   _$DoUpdateTodoMiddlewareAction? _$v;
 
+  String? _statusKey;
+  String? get statusKey => _$this._statusKey;
+  set statusKey(String? statusKey) => _$this._statusKey = statusKey;
+
   TodoBuilder? _updatedTodo;
   TodoBuilder get updatedTodo => _$this._updatedTodo ??= new TodoBuilder();
   set updatedTodo(TodoBuilder? updatedTodo) =>
@@ -490,6 +540,7 @@ class DoUpdateTodoMiddlewareActionBuilder
   DoUpdateTodoMiddlewareActionBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _statusKey = $v.statusKey;
       _updatedTodo = $v.updatedTodo.toBuilder();
       _$v = null;
     }
@@ -513,6 +564,8 @@ class DoUpdateTodoMiddlewareActionBuilder
     try {
       _$result = _$v ??
           new _$DoUpdateTodoMiddlewareAction._(
+              statusKey: BuiltValueNullFieldError.checkNotNull(
+                  statusKey, 'DoUpdateTodoMiddlewareAction', 'statusKey'),
               updatedTodo: updatedTodo.build());
     } catch (_) {
       late String _$failedField;
@@ -627,13 +680,19 @@ class SuccessUpdateTodoActionBuilder
 
 class _$DoDeleteTodoMiddlewareAction extends DoDeleteTodoMiddlewareAction {
   @override
+  final String statusKey;
+  @override
   final Todo deletedTodo;
 
   factory _$DoDeleteTodoMiddlewareAction(
           [void Function(DoDeleteTodoMiddlewareActionBuilder)? updates]) =>
       (new DoDeleteTodoMiddlewareActionBuilder()..update(updates)).build();
 
-  _$DoDeleteTodoMiddlewareAction._({required this.deletedTodo}) : super._() {
+  _$DoDeleteTodoMiddlewareAction._(
+      {required this.statusKey, required this.deletedTodo})
+      : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        statusKey, 'DoDeleteTodoMiddlewareAction', 'statusKey');
     BuiltValueNullFieldError.checkNotNull(
         deletedTodo, 'DoDeleteTodoMiddlewareAction', 'deletedTodo');
   }
@@ -651,17 +710,19 @@ class _$DoDeleteTodoMiddlewareAction extends DoDeleteTodoMiddlewareAction {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is DoDeleteTodoMiddlewareAction &&
+        statusKey == other.statusKey &&
         deletedTodo == other.deletedTodo;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, deletedTodo.hashCode));
+    return $jf($jc($jc(0, statusKey.hashCode), deletedTodo.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('DoDeleteTodoMiddlewareAction')
+          ..add('statusKey', statusKey)
           ..add('deletedTodo', deletedTodo))
         .toString();
   }
@@ -673,6 +734,10 @@ class DoDeleteTodoMiddlewareActionBuilder
             DoDeleteTodoMiddlewareActionBuilder> {
   _$DoDeleteTodoMiddlewareAction? _$v;
 
+  String? _statusKey;
+  String? get statusKey => _$this._statusKey;
+  set statusKey(String? statusKey) => _$this._statusKey = statusKey;
+
   TodoBuilder? _deletedTodo;
   TodoBuilder get deletedTodo => _$this._deletedTodo ??= new TodoBuilder();
   set deletedTodo(TodoBuilder? deletedTodo) =>
@@ -683,6 +748,7 @@ class DoDeleteTodoMiddlewareActionBuilder
   DoDeleteTodoMiddlewareActionBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
+      _statusKey = $v.statusKey;
       _deletedTodo = $v.deletedTodo.toBuilder();
       _$v = null;
     }
@@ -706,6 +772,8 @@ class DoDeleteTodoMiddlewareActionBuilder
     try {
       _$result = _$v ??
           new _$DoDeleteTodoMiddlewareAction._(
+              statusKey: BuiltValueNullFieldError.checkNotNull(
+                  statusKey, 'DoDeleteTodoMiddlewareAction', 'statusKey'),
               deletedTodo: deletedTodo.build());
     } catch (_) {
       late String _$failedField;

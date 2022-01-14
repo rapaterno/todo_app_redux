@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_epics/redux_epics.dart';
+import 'package:todo_app_redux/data/enum/status.dart';
 import 'package:todo_app_redux/data/model/todo.dart';
 import 'package:todo_app_redux/domain/app/app_state.dart';
 import 'package:todo_app_redux/domain/todo/todo_actions.dart';
@@ -45,6 +46,7 @@ void main() {
         ..isComplete = false);
 
       final action = DoCreateMiddlewareTodoAction((updates) => updates
+        ..statusKey = DoCreateMiddlewareTodoAction.createStatusKey()
         ..name = todo.name
         ..isComplete = todo.isComplete);
 
@@ -61,7 +63,13 @@ void main() {
 
       //Then
       expect(await actual.toList(), [
-        SuccessCreateTodoAction((updates) => updates..todo = todo.toBuilder())
+        SetTodoStatusAction((builder) => builder
+          ..status = Status.loading
+          ..statusKey = DoCreateMiddlewareTodoAction.createStatusKey()),
+        SuccessCreateTodoAction((updates) => updates..todo = todo.toBuilder()),
+        SetTodoStatusAction((builder) => builder
+          ..status = Status.success
+          ..statusKey = DoCreateMiddlewareTodoAction.createStatusKey()),
       ]);
     });
 
@@ -75,6 +83,7 @@ void main() {
         ..isComplete = false);
 
       final action = DoCreateMiddlewareTodoAction((updates) => updates
+        ..statusKey = DoCreateMiddlewareTodoAction.createStatusKey()
         ..name = todo.name
         ..isComplete = todo.isComplete);
 
@@ -90,7 +99,13 @@ void main() {
 
       //Then
       expect(await actual.toList(), [
-        ErrorCreateTodoAction((updates) => updates..error = Error().toString())
+        SetTodoStatusAction((builder) => builder
+          ..status = Status.loading
+          ..statusKey = DoCreateMiddlewareTodoAction.createStatusKey()),
+        ErrorCreateTodoAction((updates) => updates..error = Error().toString()),
+        SetTodoStatusAction((builder) => builder
+          ..status = Status.error
+          ..statusKey = DoCreateMiddlewareTodoAction.createStatusKey()),
       ]);
     });
     test(
@@ -98,7 +113,8 @@ void main() {
         () async {
       // Given
 
-      final action = DoReadTodoMiddlewareAction((updates) => updates);
+      final action = DoReadTodoMiddlewareAction((updates) =>
+          updates..statusKey = DoReadTodoMiddlewareAction.createStatusKey());
 
       // When
       when(mockRepository.read())
@@ -111,8 +127,14 @@ void main() {
 
       //Then
       expect(await actual.toList(), [
+        SetTodoStatusAction((builder) => builder
+          ..status = Status.loading
+          ..statusKey = DoReadTodoMiddlewareAction.createStatusKey()),
         SuccessReadTodoAction(
-            (updates) => updates..todos = mockTodos.build().toBuilder())
+            (updates) => updates..todos = mockTodos.build().toBuilder()),
+        SetTodoStatusAction((builder) => builder
+          ..status = Status.success
+          ..statusKey = DoReadTodoMiddlewareAction.createStatusKey()),
       ]);
     });
 
@@ -122,9 +144,11 @@ void main() {
       // Given
       final modifiedTodoBuilder = mockTodos[1].toBuilder();
       modifiedTodoBuilder.isComplete = !mockTodos[1].isComplete;
-
-      final action = DoUpdateTodoMiddlewareAction(
-          (updates) => updates..updatedTodo = modifiedTodoBuilder);
+      final updatedTodo = modifiedTodoBuilder.build();
+      final action = DoUpdateTodoMiddlewareAction((updates) => updates
+        ..updatedTodo = modifiedTodoBuilder
+        ..statusKey =
+            DoUpdateTodoMiddlewareAction.createStatusKey(updatedTodo));
 
       // When
       when(mockRepository.update(modifiedTodoBuilder.build()))
@@ -137,8 +161,16 @@ void main() {
 
       //Then
       expect(await actual.toList(), [
+        SetTodoStatusAction((builder) => builder
+          ..status = Status.loading
+          ..statusKey =
+              DoUpdateTodoMiddlewareAction.createStatusKey(updatedTodo)),
         SuccessUpdateTodoAction(
-            (updates) => updates..updatedTodo = modifiedTodoBuilder)
+            (updates) => updates..updatedTodo = modifiedTodoBuilder),
+        SetTodoStatusAction((builder) => builder
+          ..status = Status.success
+          ..statusKey =
+              DoUpdateTodoMiddlewareAction.createStatusKey(updatedTodo)),
       ]);
     });
 
@@ -147,8 +179,9 @@ void main() {
         () async {
       //Given
       final deletedTodo = mockTodos[1].toBuilder();
-      final action = DoDeleteTodoMiddlewareAction(
-          (updates) => updates..deletedTodo = deletedTodo);
+      final action = DoDeleteTodoMiddlewareAction((updates) => updates
+        ..deletedTodo = deletedTodo
+        ..statusKey = DoDeleteTodoMiddlewareAction.createStatusKey());
 
       // When
       when(mockRepository.delete(deletedTodo.build()))
@@ -160,7 +193,14 @@ void main() {
 
       // Then
       expect(await actual.toList(), [
-        SuccessDeleteTodoAction((updates) => updates..deletedTodo = deletedTodo)
+        SetTodoStatusAction((builder) => builder
+          ..status = Status.loading
+          ..statusKey = DoDeleteTodoMiddlewareAction.createStatusKey()),
+        SuccessDeleteTodoAction(
+            (updates) => updates..deletedTodo = deletedTodo),
+        SetTodoStatusAction((builder) => builder
+          ..status = Status.success
+          ..statusKey = DoDeleteTodoMiddlewareAction.createStatusKey()),
       ]);
     });
   });
