@@ -1,5 +1,6 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
+import 'package:todo_app_redux/data/enum/status.dart';
 import 'package:todo_app_redux/data/model/todo.dart';
 
 part 'todo_actions.g.dart';
@@ -101,4 +102,49 @@ abstract class SuccessDeleteTodoAction
   factory SuccessDeleteTodoAction(
           [void Function(SuccessDeleteTodoActionBuilder) updates]) =
       _$SuccessDeleteTodoAction;
+}
+
+abstract class SetDeleteStatus
+    implements Built<SetDeleteStatus, SetDeleteStatusBuilder> {
+  // Fields
+  Status get status;
+  SetDeleteStatus._();
+
+  factory SetDeleteStatus([void Function(SetDeleteStatusBuilder) updates]) =
+      _$SetDeleteStatus;
+}
+
+abstract class SetUpdateStatus
+    implements Built<SetUpdateStatus, SetUpdateStatusBuilder> {
+  // Fields
+  Status get status;
+  int get id;
+
+  SetUpdateStatus._();
+
+  factory SetUpdateStatus([void Function(SetUpdateStatusBuilder) updates]) =
+      _$SetUpdateStatus;
+}
+
+abstract class SetReadTodosStatus
+    implements Built<SetReadTodosStatus, SetReadTodosStatusBuilder> {
+  // Fields
+  Status get status;
+
+  SetReadTodosStatus._();
+
+  factory SetReadTodosStatus(
+          [void Function(SetReadTodosStatusBuilder) updates]) =
+      _$SetReadTodosStatus;
+}
+
+abstract class SetSaveStatus
+    implements Built<SetSaveStatus, SetSaveStatusBuilder> {
+  // Fields
+
+  Status get status;
+  SetSaveStatus._();
+
+  factory SetSaveStatus([void Function(SetSaveStatusBuilder) updates]) =
+      _$SetSaveStatus;
 }
