@@ -112,47 +112,14 @@ abstract class SuccessDeleteTodoAction
       _$SuccessDeleteTodoAction;
 }
 
-abstract class SetDeleteStatus
-    implements Built<SetDeleteStatus, SetDeleteStatusBuilder> {
+abstract class SetTodoStatusAction
+    implements Built<SetTodoStatusAction, SetTodoStatusActionBuilder> {
   // Fields
   Status get status;
-  SetDeleteStatus._();
+  String get statusKey;
+  SetTodoStatusAction._();
 
-  factory SetDeleteStatus([void Function(SetDeleteStatusBuilder) updates]) =
-      _$SetDeleteStatus;
-}
-
-abstract class SetUpdateStatus
-    implements Built<SetUpdateStatus, SetUpdateStatusBuilder> {
-  // Fields
-  Status get status;
-  int get id;
-
-  SetUpdateStatus._();
-
-  factory SetUpdateStatus([void Function(SetUpdateStatusBuilder) updates]) =
-      _$SetUpdateStatus;
-}
-
-abstract class SetReadTodosStatus
-    implements Built<SetReadTodosStatus, SetReadTodosStatusBuilder> {
-  // Fields
-  Status get status;
-
-  SetReadTodosStatus._();
-
-  factory SetReadTodosStatus(
-          [void Function(SetReadTodosStatusBuilder) updates]) =
-      _$SetReadTodosStatus;
-}
-
-abstract class SetSaveStatus
-    implements Built<SetSaveStatus, SetSaveStatusBuilder> {
-  // Fields
-
-  Status get status;
-  SetSaveStatus._();
-
-  factory SetSaveStatus([void Function(SetSaveStatusBuilder) updates]) =
-      _$SetSaveStatus;
+  factory SetTodoStatusAction(
+          [void Function(SetTodoStatusActionBuilder) updates]) =
+      _$SetTodoStatusAction;
 }

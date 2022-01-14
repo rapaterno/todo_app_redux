@@ -818,329 +818,98 @@ class SuccessDeleteTodoActionBuilder
   }
 }
 
-class _$SetDeleteStatus extends SetDeleteStatus {
-  @override
-  final Status status;
-
-  factory _$SetDeleteStatus([void Function(SetDeleteStatusBuilder)? updates]) =>
-      (new SetDeleteStatusBuilder()..update(updates)).build();
-
-  _$SetDeleteStatus._({required this.status}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(status, 'SetDeleteStatus', 'status');
-  }
-
-  @override
-  SetDeleteStatus rebuild(void Function(SetDeleteStatusBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  SetDeleteStatusBuilder toBuilder() =>
-      new SetDeleteStatusBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is SetDeleteStatus && status == other.status;
-  }
-
-  @override
-  int get hashCode {
-    return $jf($jc(0, status.hashCode));
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper('SetDeleteStatus')
-          ..add('status', status))
-        .toString();
-  }
-}
-
-class SetDeleteStatusBuilder
-    implements Builder<SetDeleteStatus, SetDeleteStatusBuilder> {
-  _$SetDeleteStatus? _$v;
-
-  Status? _status;
-  Status? get status => _$this._status;
-  set status(Status? status) => _$this._status = status;
-
-  SetDeleteStatusBuilder();
-
-  SetDeleteStatusBuilder get _$this {
-    final $v = _$v;
-    if ($v != null) {
-      _status = $v.status;
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(SetDeleteStatus other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$SetDeleteStatus;
-  }
-
-  @override
-  void update(void Function(SetDeleteStatusBuilder)? updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  _$SetDeleteStatus build() {
-    final _$result = _$v ??
-        new _$SetDeleteStatus._(
-            status: BuiltValueNullFieldError.checkNotNull(
-                status, 'SetDeleteStatus', 'status'));
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$SetUpdateStatus extends SetUpdateStatus {
+class _$SetTodoStatusAction extends SetTodoStatusAction {
   @override
   final Status status;
   @override
-  final int id;
+  final String statusKey;
 
-  factory _$SetUpdateStatus([void Function(SetUpdateStatusBuilder)? updates]) =>
-      (new SetUpdateStatusBuilder()..update(updates)).build();
+  factory _$SetTodoStatusAction(
+          [void Function(SetTodoStatusActionBuilder)? updates]) =>
+      (new SetTodoStatusActionBuilder()..update(updates)).build();
 
-  _$SetUpdateStatus._({required this.status, required this.id}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(status, 'SetUpdateStatus', 'status');
-    BuiltValueNullFieldError.checkNotNull(id, 'SetUpdateStatus', 'id');
-  }
-
-  @override
-  SetUpdateStatus rebuild(void Function(SetUpdateStatusBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  SetUpdateStatusBuilder toBuilder() =>
-      new SetUpdateStatusBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is SetUpdateStatus && status == other.status && id == other.id;
-  }
-
-  @override
-  int get hashCode {
-    return $jf($jc($jc(0, status.hashCode), id.hashCode));
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper('SetUpdateStatus')
-          ..add('status', status)
-          ..add('id', id))
-        .toString();
-  }
-}
-
-class SetUpdateStatusBuilder
-    implements Builder<SetUpdateStatus, SetUpdateStatusBuilder> {
-  _$SetUpdateStatus? _$v;
-
-  Status? _status;
-  Status? get status => _$this._status;
-  set status(Status? status) => _$this._status = status;
-
-  int? _id;
-  int? get id => _$this._id;
-  set id(int? id) => _$this._id = id;
-
-  SetUpdateStatusBuilder();
-
-  SetUpdateStatusBuilder get _$this {
-    final $v = _$v;
-    if ($v != null) {
-      _status = $v.status;
-      _id = $v.id;
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(SetUpdateStatus other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$SetUpdateStatus;
-  }
-
-  @override
-  void update(void Function(SetUpdateStatusBuilder)? updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  _$SetUpdateStatus build() {
-    final _$result = _$v ??
-        new _$SetUpdateStatus._(
-            status: BuiltValueNullFieldError.checkNotNull(
-                status, 'SetUpdateStatus', 'status'),
-            id: BuiltValueNullFieldError.checkNotNull(
-                id, 'SetUpdateStatus', 'id'));
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$SetReadTodosStatus extends SetReadTodosStatus {
-  @override
-  final Status status;
-
-  factory _$SetReadTodosStatus(
-          [void Function(SetReadTodosStatusBuilder)? updates]) =>
-      (new SetReadTodosStatusBuilder()..update(updates)).build();
-
-  _$SetReadTodosStatus._({required this.status}) : super._() {
+  _$SetTodoStatusAction._({required this.status, required this.statusKey})
+      : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        status, 'SetReadTodosStatus', 'status');
+        status, 'SetTodoStatusAction', 'status');
+    BuiltValueNullFieldError.checkNotNull(
+        statusKey, 'SetTodoStatusAction', 'statusKey');
   }
 
   @override
-  SetReadTodosStatus rebuild(
-          void Function(SetReadTodosStatusBuilder) updates) =>
+  SetTodoStatusAction rebuild(
+          void Function(SetTodoStatusActionBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  SetReadTodosStatusBuilder toBuilder() =>
-      new SetReadTodosStatusBuilder()..replace(this);
+  SetTodoStatusActionBuilder toBuilder() =>
+      new SetTodoStatusActionBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is SetReadTodosStatus && status == other.status;
+    return other is SetTodoStatusAction &&
+        status == other.status &&
+        statusKey == other.statusKey;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, status.hashCode));
+    return $jf($jc($jc(0, status.hashCode), statusKey.hashCode));
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('SetReadTodosStatus')
-          ..add('status', status))
+    return (newBuiltValueToStringHelper('SetTodoStatusAction')
+          ..add('status', status)
+          ..add('statusKey', statusKey))
         .toString();
   }
 }
 
-class SetReadTodosStatusBuilder
-    implements Builder<SetReadTodosStatus, SetReadTodosStatusBuilder> {
-  _$SetReadTodosStatus? _$v;
+class SetTodoStatusActionBuilder
+    implements Builder<SetTodoStatusAction, SetTodoStatusActionBuilder> {
+  _$SetTodoStatusAction? _$v;
 
   Status? _status;
   Status? get status => _$this._status;
   set status(Status? status) => _$this._status = status;
 
-  SetReadTodosStatusBuilder();
+  String? _statusKey;
+  String? get statusKey => _$this._statusKey;
+  set statusKey(String? statusKey) => _$this._statusKey = statusKey;
 
-  SetReadTodosStatusBuilder get _$this {
+  SetTodoStatusActionBuilder();
+
+  SetTodoStatusActionBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _status = $v.status;
+      _statusKey = $v.statusKey;
       _$v = null;
     }
     return this;
   }
 
   @override
-  void replace(SetReadTodosStatus other) {
+  void replace(SetTodoStatusAction other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$SetReadTodosStatus;
+    _$v = other as _$SetTodoStatusAction;
   }
 
   @override
-  void update(void Function(SetReadTodosStatusBuilder)? updates) {
+  void update(void Function(SetTodoStatusActionBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$SetReadTodosStatus build() {
+  _$SetTodoStatusAction build() {
     final _$result = _$v ??
-        new _$SetReadTodosStatus._(
+        new _$SetTodoStatusAction._(
             status: BuiltValueNullFieldError.checkNotNull(
-                status, 'SetReadTodosStatus', 'status'));
-    replace(_$result);
-    return _$result;
-  }
-}
-
-class _$SetSaveStatus extends SetSaveStatus {
-  @override
-  final Status status;
-
-  factory _$SetSaveStatus([void Function(SetSaveStatusBuilder)? updates]) =>
-      (new SetSaveStatusBuilder()..update(updates)).build();
-
-  _$SetSaveStatus._({required this.status}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(status, 'SetSaveStatus', 'status');
-  }
-
-  @override
-  SetSaveStatus rebuild(void Function(SetSaveStatusBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
-
-  @override
-  SetSaveStatusBuilder toBuilder() => new SetSaveStatusBuilder()..replace(this);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(other, this)) return true;
-    return other is SetSaveStatus && status == other.status;
-  }
-
-  @override
-  int get hashCode {
-    return $jf($jc(0, status.hashCode));
-  }
-
-  @override
-  String toString() {
-    return (newBuiltValueToStringHelper('SetSaveStatus')..add('status', status))
-        .toString();
-  }
-}
-
-class SetSaveStatusBuilder
-    implements Builder<SetSaveStatus, SetSaveStatusBuilder> {
-  _$SetSaveStatus? _$v;
-
-  Status? _status;
-  Status? get status => _$this._status;
-  set status(Status? status) => _$this._status = status;
-
-  SetSaveStatusBuilder();
-
-  SetSaveStatusBuilder get _$this {
-    final $v = _$v;
-    if ($v != null) {
-      _status = $v.status;
-      _$v = null;
-    }
-    return this;
-  }
-
-  @override
-  void replace(SetSaveStatus other) {
-    ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$SetSaveStatus;
-  }
-
-  @override
-  void update(void Function(SetSaveStatusBuilder)? updates) {
-    if (updates != null) updates(this);
-  }
-
-  @override
-  _$SetSaveStatus build() {
-    final _$result = _$v ??
-        new _$SetSaveStatus._(
-            status: BuiltValueNullFieldError.checkNotNull(
-                status, 'SetSaveStatus', 'status'));
+                status, 'SetTodoStatusAction', 'status'),
+            statusKey: BuiltValueNullFieldError.checkNotNull(
+                statusKey, 'SetTodoStatusAction', 'statusKey'));
     replace(_$result);
     return _$result;
   }
