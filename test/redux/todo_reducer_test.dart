@@ -1,65 +1,61 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:todo_app_redux/data/model/todo.dart';
+import 'package:todo_app_redux/domain/app/app_reducer.dart';
+import 'package:todo_app_redux/domain/app/app_state.dart';
 import 'package:todo_app_redux/domain/todo/todo_actions.dart';
-import 'package:todo_app_redux/domain/todo/todo_reducer.dart';
+
+import '../mock_todos.dart';
 
 void main() {
-  group('TodoReducer', () {
-    BuiltList<Todo> mockTodos = [
-      Todo((b) => b
-        ..id = '1'
-        ..name = 'todo 1'
-        ..isComplete = false),
-      Todo((b) => b
-        ..id = '2'
-        ..name = 'todo 2'
-        ..isComplete = false),
-      Todo((b) => b
-        ..id = '3'
-        ..name = 'todo 3'
-        ..isComplete = false),
-    ].build();
+  group('TodoReducers', () {
     test('when creating todo', () {
-      BuiltList<Todo> state = <Todo>[].build();
+      BuiltList<Todo> initialTodos = <Todo>[].build();
       final todo = mockTodos[0];
+      final state =
+          AppState((builder) => builder..todosState = initialTodos.toBuilder());
 
-      final newState = todoReducer(
+      final newState = appReducer(
           state, SuccessCreateTodoAction((b) => b..todo = todo.toBuilder()));
 
-      expect(newState[0], todo);
+      expect(newState.todosState[0], todo);
     });
 
     test('when reading todos', () {
-      BuiltList<Todo> state = <Todo>[].build();
+      BuiltList<Todo> initialTodos = <Todo>[].build();
+      final state =
+          AppState((builder) => builder..todosState = initialTodos.toBuilder());
 
-      final newState = todoReducer(state,
-          SuccessReadTodoAction((b) => b..todos = mockTodos.toBuilder()));
+      final newState = appReducer(
+          state,
+          SuccessReadTodoAction(
+              (b) => b..todos = mockTodos.build().toBuilder()));
 
-      expect(newState, mockTodos);
+      expect(newState.todosState, mockTodos);
     });
 
     test('when updating todo', () {
-      BuiltList<Todo> state = mockTodos;
+      final state = AppState(
+          (builder) => builder..todosState = mockTodos.build().toBuilder());
       final updatedTodoBuilder = mockTodos[2].toBuilder();
       updatedTodoBuilder.isComplete = true;
 
-      final newState = todoReducer(state,
+      final newState = appReducer(state,
           SuccessUpdateTodoAction((b) => b..updatedTodo = updatedTodoBuilder));
 
-      expect(newState[2], updatedTodoBuilder.build());
+      expect(newState.todosState[2], updatedTodoBuilder.build());
     });
 
     test('when deleting todo', () {
-      BuiltList<Todo> state = mockTodos;
+      final state = AppState(
+          (builder) => builder..todosState = mockTodos.build().toBuilder());
 
-      final newState = todoReducer(
+      final newState = appReducer(
           state,
           SuccessDeleteTodoAction(
               (b) => b..deletedTodo = mockTodos[0].toBuilder()));
 
-      expect(newState.length, mockTodos.length - 1);
+      expect(newState.todosState.length, mockTodos.length - 1);
     });
   });
 }
