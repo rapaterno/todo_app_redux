@@ -80,6 +80,19 @@ abstract class SuccessReadTodoAction
       _$SuccessReadTodoAction;
 }
 
+abstract class ErrorReadTodoAction
+    implements
+        Built<ErrorReadTodoAction, ErrorReadTodoActionBuilder>,
+        TodoAction {
+  // Fields
+  String get error;
+  ErrorReadTodoAction._();
+
+  factory ErrorReadTodoAction(
+          [void Function(ErrorReadTodoActionBuilder) updates]) =
+      _$ErrorReadTodoAction;
+}
+
 abstract class DoUpdateTodoMiddlewareAction
     implements
         Built<DoUpdateTodoMiddlewareAction,
@@ -109,6 +122,18 @@ abstract class SuccessUpdateTodoAction
   factory SuccessUpdateTodoAction(
           [void Function(SuccessUpdateTodoActionBuilder) updates]) =
       _$SuccessUpdateTodoAction;
+}
+
+abstract class ErrorUpdateTodoAction
+    implements
+        Built<ErrorUpdateTodoAction, ErrorUpdateTodoActionBuilder>,
+        TodoAction {
+  String get error;
+  ErrorUpdateTodoAction._();
+
+  factory ErrorUpdateTodoAction(
+          [void Function(ErrorUpdateTodoActionBuilder) updates]) =
+      _$ErrorUpdateTodoAction;
 }
 
 abstract class DoDeleteTodoMiddlewareAction
@@ -142,6 +167,19 @@ abstract class SuccessDeleteTodoAction
   factory SuccessDeleteTodoAction(
           [void Function(SuccessDeleteTodoActionBuilder) updates]) =
       _$SuccessDeleteTodoAction;
+}
+
+abstract class ErrorDeleteTodoAction
+    implements
+        Built<ErrorDeleteTodoAction, ErrorDeleteTodoActionBuilder>,
+        TodoAction {
+  String get error;
+
+  ErrorDeleteTodoAction._();
+
+  factory ErrorDeleteTodoAction(
+          [void Function(ErrorDeleteTodoActionBuilder) updates]) =
+      _$ErrorDeleteTodoAction;
 }
 
 abstract class SetTodoStatusAction

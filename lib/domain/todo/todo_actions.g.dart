@@ -470,6 +470,88 @@ class SuccessReadTodoActionBuilder
   }
 }
 
+class _$ErrorReadTodoAction extends ErrorReadTodoAction {
+  @override
+  final String error;
+
+  factory _$ErrorReadTodoAction(
+          [void Function(ErrorReadTodoActionBuilder)? updates]) =>
+      (new ErrorReadTodoActionBuilder()..update(updates)).build();
+
+  _$ErrorReadTodoAction._({required this.error}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        error, 'ErrorReadTodoAction', 'error');
+  }
+
+  @override
+  ErrorReadTodoAction rebuild(
+          void Function(ErrorReadTodoActionBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ErrorReadTodoActionBuilder toBuilder() =>
+      new ErrorReadTodoActionBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ErrorReadTodoAction && error == other.error;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, error.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ErrorReadTodoAction')
+          ..add('error', error))
+        .toString();
+  }
+}
+
+class ErrorReadTodoActionBuilder
+    implements Builder<ErrorReadTodoAction, ErrorReadTodoActionBuilder> {
+  _$ErrorReadTodoAction? _$v;
+
+  String? _error;
+  String? get error => _$this._error;
+  set error(String? error) => _$this._error = error;
+
+  ErrorReadTodoActionBuilder();
+
+  ErrorReadTodoActionBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _error = $v.error;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ErrorReadTodoAction other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$ErrorReadTodoAction;
+  }
+
+  @override
+  void update(void Function(ErrorReadTodoActionBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$ErrorReadTodoAction build() {
+    final _$result = _$v ??
+        new _$ErrorReadTodoAction._(
+            error: BuiltValueNullFieldError.checkNotNull(
+                error, 'ErrorReadTodoAction', 'error'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$DoUpdateTodoMiddlewareAction extends DoUpdateTodoMiddlewareAction {
   @override
   final String statusKey;
@@ -678,6 +760,88 @@ class SuccessUpdateTodoActionBuilder
   }
 }
 
+class _$ErrorUpdateTodoAction extends ErrorUpdateTodoAction {
+  @override
+  final String error;
+
+  factory _$ErrorUpdateTodoAction(
+          [void Function(ErrorUpdateTodoActionBuilder)? updates]) =>
+      (new ErrorUpdateTodoActionBuilder()..update(updates)).build();
+
+  _$ErrorUpdateTodoAction._({required this.error}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        error, 'ErrorUpdateTodoAction', 'error');
+  }
+
+  @override
+  ErrorUpdateTodoAction rebuild(
+          void Function(ErrorUpdateTodoActionBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ErrorUpdateTodoActionBuilder toBuilder() =>
+      new ErrorUpdateTodoActionBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ErrorUpdateTodoAction && error == other.error;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, error.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ErrorUpdateTodoAction')
+          ..add('error', error))
+        .toString();
+  }
+}
+
+class ErrorUpdateTodoActionBuilder
+    implements Builder<ErrorUpdateTodoAction, ErrorUpdateTodoActionBuilder> {
+  _$ErrorUpdateTodoAction? _$v;
+
+  String? _error;
+  String? get error => _$this._error;
+  set error(String? error) => _$this._error = error;
+
+  ErrorUpdateTodoActionBuilder();
+
+  ErrorUpdateTodoActionBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _error = $v.error;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ErrorUpdateTodoAction other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$ErrorUpdateTodoAction;
+  }
+
+  @override
+  void update(void Function(ErrorUpdateTodoActionBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$ErrorUpdateTodoAction build() {
+    final _$result = _$v ??
+        new _$ErrorUpdateTodoAction._(
+            error: BuiltValueNullFieldError.checkNotNull(
+                error, 'ErrorUpdateTodoAction', 'error'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
 class _$DoDeleteTodoMiddlewareAction extends DoDeleteTodoMiddlewareAction {
   @override
   final String statusKey;
@@ -881,6 +1045,88 @@ class SuccessDeleteTodoActionBuilder
       }
       rethrow;
     }
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$ErrorDeleteTodoAction extends ErrorDeleteTodoAction {
+  @override
+  final String error;
+
+  factory _$ErrorDeleteTodoAction(
+          [void Function(ErrorDeleteTodoActionBuilder)? updates]) =>
+      (new ErrorDeleteTodoActionBuilder()..update(updates)).build();
+
+  _$ErrorDeleteTodoAction._({required this.error}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(
+        error, 'ErrorDeleteTodoAction', 'error');
+  }
+
+  @override
+  ErrorDeleteTodoAction rebuild(
+          void Function(ErrorDeleteTodoActionBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  ErrorDeleteTodoActionBuilder toBuilder() =>
+      new ErrorDeleteTodoActionBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is ErrorDeleteTodoAction && error == other.error;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, error.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('ErrorDeleteTodoAction')
+          ..add('error', error))
+        .toString();
+  }
+}
+
+class ErrorDeleteTodoActionBuilder
+    implements Builder<ErrorDeleteTodoAction, ErrorDeleteTodoActionBuilder> {
+  _$ErrorDeleteTodoAction? _$v;
+
+  String? _error;
+  String? get error => _$this._error;
+  set error(String? error) => _$this._error = error;
+
+  ErrorDeleteTodoActionBuilder();
+
+  ErrorDeleteTodoActionBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _error = $v.error;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(ErrorDeleteTodoAction other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$ErrorDeleteTodoAction;
+  }
+
+  @override
+  void update(void Function(ErrorDeleteTodoActionBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$ErrorDeleteTodoAction build() {
+    final _$result = _$v ??
+        new _$ErrorDeleteTodoAction._(
+            error: BuiltValueNullFieldError.checkNotNull(
+                error, 'ErrorDeleteTodoAction', 'error'));
     replace(_$result);
     return _$result;
   }

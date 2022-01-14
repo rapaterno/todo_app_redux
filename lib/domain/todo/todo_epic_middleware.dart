@@ -37,7 +37,8 @@ class TodoMiddleware implements EpicClass<AppState> {
             ..statusKey = action.statusKey
             ..status = Status.success);
         } catch (e) {
-          //TODO: Add ErrorAction
+          yield ErrorUpdateTodoAction(
+              (updates) => updates..error = e.toString());
           yield SetTodoStatusAction((updates) => updates
             ..statusKey = action.statusKey
             ..status = Status.error);
@@ -61,7 +62,7 @@ class TodoMiddleware implements EpicClass<AppState> {
             ..statusKey = action.statusKey
             ..status = Status.success);
         } catch (e) {
-          //TODO: Add ErrorAction
+          yield ErrorReadTodoAction((updates) => updates..error = e.toString());
           yield SetTodoStatusAction((updates) => updates
             ..statusKey = action.statusKey
             ..status = Status.error);
@@ -85,7 +86,8 @@ class TodoMiddleware implements EpicClass<AppState> {
             ..statusKey = action.statusKey
             ..status = Status.success);
         } catch (e) {
-          //TODO: Add ErrorAction
+          yield ErrorDeleteTodoAction(
+              (updates) => updates..error = e.toString());
           yield SetTodoStatusAction((updates) => updates
             ..statusKey = action.statusKey
             ..status = Status.error);
