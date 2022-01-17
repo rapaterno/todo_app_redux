@@ -55,19 +55,18 @@ class CreateTodoDialog extends StatelessWidget {
                       },
                       child: child);
                 },
-                converter: (store) => CreateTodoViewModel(
-                      (builder) => builder
-                        ..status = store.state.statuses[
-                                DoCreateMiddlewareTodoAction
-                                    .createStatusKey()] ??
-                            Status.idle
-                        ..onTodoCreate = (String name) => store.dispatch(
-                            DoCreateMiddlewareTodoAction((builder) => builder
-                              ..statusKey =
-                                  DoCreateMiddlewareTodoAction.createStatusKey()
-                              ..isComplete = false
-                              ..name = name)),
-                    ))
+                converter: (store) => CreateTodoViewModel((builder) => builder
+                  ..status = store.state.statuses[
+                          DoCreateMiddlewareTodoAction.createStatusKey()] ??
+                      Status.idle
+                  ..onTodoCreate = (String name) {
+                    store.dispatch(DoCreateMiddlewareTodoAction((builder) =>
+                        builder
+                          ..statusKey =
+                              DoCreateMiddlewareTodoAction.createStatusKey()
+                          ..isComplete = false
+                          ..name = name));
+                  }))
           ],
         )
       ],

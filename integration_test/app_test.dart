@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:todo_app_redux/main.dart' as app;
 import 'package:todo_app_redux/presentation/shared/todo_list/todo_tile.dart';
+import 'package:todo_app_redux/shared/keys.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -29,19 +30,57 @@ void main() {
       expect(createTextfield, findsOneWidget);
       await tester.enterText(createTextfield, integrationTodoText);
 
-      await tester.tap(find.bySemanticsLabel('Save'));
+      await tester.tap(find.text('Save'));
 
       await tester.pumpAndSettle();
 
       expect(find.text(integrationTodoText), findsOneWidget);
     });
 
-    // testWidgets('view incomplete todos', (WidgetTester tester) async {
-    //   app.main();
-    //   await tester.tap(find.bySemanticsLabel('Incomplete'));
-    //   await tester.pumpAndSettle();
-    //   expect(find.text(integrationTodoText), findsOneWidget);
-    // });
+    testWidgets('view incomplete todos', (WidgetTester tester) async {
+      app.main();
+
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Incomplete'));
+
+      await tester.pumpAndSettle();
+
+      expect(find.text(integrationTodoText), findsOneWidget);
+    });
+    testWidgets('update todo status', (WidgetTester tester) async {
+      app.main();
+
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byIcon(Icons.check_box_outline_blank));
+
+      await tester.pumpAndSettle();
+
+      expect(tester.firstWidget(find.byType(TodoTile)), findsOneWidget);
+    });
+    testWidgets('edit todo name', (WidgetTester tester) async {
+      final editedIntegrationText = "$integrationTodoText edited";
+      app.main();
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text(integrationTodoText));
+
+      await tester.pumpAndSettle();
+
+      expect(find.text('Edit Todo'), findsOneWidget);
+
+      final editTextfield = find.byType(TextField);
+
+      await tester.enterText(editTextfield, editedIntegrationText);
+
+      await tester.tap(find.text('Save'));
+
+      await tester.pumpAndSettle();
+
+      expect(find.text(editedIntegrationText), findsOneWidget);
+    });
+
     // testWidgets('view complete todos', (WidgetTester tester) async {
     //   app.main();
     //   await tester.tap(find.bySemanticsLabel('Complete'));

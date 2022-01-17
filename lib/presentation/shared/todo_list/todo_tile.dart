@@ -5,8 +5,7 @@ import 'package:todo_app_redux/data/model/todo.dart';
 import 'package:todo_app_redux/domain/app/app_state.dart';
 import 'package:todo_app_redux/domain/todo/todo_actions.dart';
 import 'package:todo_app_redux/presentation/view_models/todo_tile_view_model.dart';
-
-const leadingKey = "checkboxKey";
+import 'package:todo_app_redux/shared/keys.dart';
 
 class TodoTile extends StatelessWidget {
   const TodoTile(this.todo, this.onCheckboxTapped, this.onTileTapped);
@@ -15,13 +14,15 @@ class TodoTile extends StatelessWidget {
   final Function(Todo) onCheckboxTapped;
   final Function(Todo) onTileTapped;
 
+  Key get checkboxKey => Key(SharedKeys.checkboxButton(todo.id));
+
   ///Returns a checked checkbox icon if [task.isComplete] is true, unchecked if false
   Widget _buildLeading() {
     return StoreConnector<AppState, TodoTileViewModel>(
         distinct: true,
         builder: (context, viewModel) {
           return GestureDetector(
-            key: Key(leadingKey),
+            key: checkboxKey,
             onTap: viewModel.status == Status.loading
                 ? null
                 : () => onCheckboxTapped(todo),

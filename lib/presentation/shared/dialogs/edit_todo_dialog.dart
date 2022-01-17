@@ -63,16 +63,18 @@ class EditTodoDialog extends StatelessWidget {
                             DoDeleteTodoMiddlewareAction.createStatusKey()] ??
                         Status.idle
               }
-              ..onTodoUpdate = (updateTodo) => store.dispatch(
-                  DoUpdateTodoMiddlewareAction((builder) => builder
-                    ..updatedTodo = updateTodo.toBuilder()
-                    ..statusKey = DoUpdateTodoMiddlewareAction.createStatusKey(
-                        updateTodo)))
-                ..onTodoDelete = (deleteTodo) => store.dispatch(
-                    DoDeleteTodoMiddlewareAction((builder) => builder
-                      ..deletedTodo = deleteTodo.toBuilder()
-                      ..statusKey =
-                          DoDeleteTodoMiddlewareAction.createStatusKey()))))
+              ..onTodoDelete = (deleteTodo) {
+                store.dispatch(DoDeleteTodoMiddlewareAction((builder) => builder
+                  ..deletedTodo = deleteTodo.toBuilder()
+                  ..statusKey =
+                      DoDeleteTodoMiddlewareAction.createStatusKey()));
+              }
+              ..onTodoUpdate = (updateTodo) {
+                store.dispatch(DoUpdateTodoMiddlewareAction((builder) => builder
+                  ..updatedTodo = updateTodo.toBuilder()
+                  ..statusKey = DoUpdateTodoMiddlewareAction.createStatusKey(
+                      updateTodo)));
+              }))
       ],
     );
   }
