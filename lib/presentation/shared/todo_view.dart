@@ -5,6 +5,7 @@ import 'package:todo_app_redux/data/enum/status.dart';
 import 'package:todo_app_redux/data/model/todo.dart';
 import 'package:todo_app_redux/domain/app/app_state.dart';
 import 'package:todo_app_redux/domain/todo/todo_actions.dart';
+import 'package:todo_app_redux/domain/todo/todo_state.dart';
 import 'package:todo_app_redux/presentation/shared/dialogs/edit_todo_dialog.dart';
 import 'package:todo_app_redux/presentation/shared/todo_list/todo_list.dart';
 import 'package:todo_app_redux/presentation/view_models/todo_view_model.dart';
@@ -61,17 +62,27 @@ class TodoView extends StatelessWidget {
     );
   }
 
-  BuiltList<Todo> _getTodos(BuiltList<Todo> _todos, bool? isComplete) {
-    final todoBuilder = _todos.toBuilder();
-
+  BuiltList<Todo> _getTodos(TodoState todoState, bool? isComplete) {
+    final List<Todo> todos = [];
     if (isComplete == null) {
-      return todoBuilder.build();
+      todoState.todos.forEach((key, value) {
+        todos.add(value);
+      });
     } else if (isComplete) {
-      todoBuilder.where((todo) => todo.isComplete);
-      return todoBuilder.build();
+      todoState.completeIds.forEach((value) {
+        final completeTodo = todoState.todos[value];
+        if (completeTodo != null) {
+          todos.add(completeTodo);
+        }
+      });
     } else {
-      todoBuilder.where((todo) => !todo.isComplete);
-      return todoBuilder.build();
+      todoState.incompleteIds.forEach((value) {
+        final incompleteTodo = todoState.todos[value];
+        if (incompleteTodo != null) {
+          todos.add(incompleteTodo);
+        }
+      });
     }
+    return todos.build();
   }
 }

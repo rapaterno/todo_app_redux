@@ -8,7 +8,7 @@ part of 'app_state.dart';
 
 class _$AppState extends AppState {
   @override
-  final BuiltList<Todo> todosState;
+  final TodoState todosState;
   @override
   final BuiltMap<String, Status> statuses;
 
@@ -52,10 +52,10 @@ class _$AppState extends AppState {
 class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   _$AppState? _$v;
 
-  ListBuilder<Todo>? _todosState;
-  ListBuilder<Todo> get todosState =>
-      _$this._todosState ??= new ListBuilder<Todo>();
-  set todosState(ListBuilder<Todo>? todosState) =>
+  TodoStateBuilder? _todosState;
+  TodoStateBuilder get todosState =>
+      _$this._todosState ??= new TodoStateBuilder();
+  set todosState(TodoStateBuilder? todosState) =>
       _$this._todosState = todosState;
 
   MapBuilder<String, Status>? _statuses;
