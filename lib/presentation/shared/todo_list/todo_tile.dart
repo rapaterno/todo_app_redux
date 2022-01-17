@@ -32,10 +32,10 @@ class TodoTile extends StatelessWidget {
                     : Icons.check_box_outline_blank),
           );
         },
-        converter: (store) => TodoTileViewModel(
-            status: store.state.statuses[
-                    DoUpdateTodoMiddlewareAction.createStatusKey(todo)] ??
-                Status.idle));
+        converter: (store) => TodoTileViewModel((builder) => builder
+          ..status = store.state.statuses[
+                  DoUpdateTodoMiddlewareAction.createStatusKey(todo)] ??
+              Status.idle));
   }
 
   @override

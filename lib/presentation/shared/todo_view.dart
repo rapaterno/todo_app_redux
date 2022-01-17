@@ -19,26 +19,24 @@ class TodoView extends StatelessWidget {
       distinct: true,
       onInit: (store) => store.dispatch(DoReadTodoMiddlewareAction((updates) =>
           updates..statusKey = DoReadTodoMiddlewareAction.createStatusKey())),
-      converter: (store) => TodoViewModel(
-          status: store.state
-                  .statuses[DoReadTodoMiddlewareAction.createStatusKey()] ??
-              Status.idle,
-          todos: _getTodos(store.state.todosState, isComplete),
-          onCheckboxTapped: (todo) {
-            final updatedTodo = todo
-                .rebuild((updates) => updates..isComplete = !todo.isComplete);
-            store.dispatch(DoUpdateTodoMiddlewareAction((updates) => updates
-              ..updatedTodo = updatedTodo.toBuilder()
-              ..statusKey =
-                  DoUpdateTodoMiddlewareAction.createStatusKey(todo)));
-          },
-          onTodoEdited: (todo, name) {
-            final updatedTodo = todo.rebuild((updates) => updates..name = name);
-            store.dispatch(DoUpdateTodoMiddlewareAction((updates) => updates
-              ..updatedTodo = updatedTodo.toBuilder()
-              ..statusKey =
-                  DoUpdateTodoMiddlewareAction.createStatusKey(todo)));
-          }),
+      converter: (store) => TodoViewModel((builder) => builder
+        ..status = store
+                .state.statuses[DoReadTodoMiddlewareAction.createStatusKey()] ??
+            Status.idle
+        ..todos = _getTodos(store.state.todosState, isComplete).toBuilder()
+        ..onCheckboxTapped = (todo) {
+          final updatedTodo =
+              todo.rebuild((updates) => updates..isComplete = !todo.isComplete);
+          store.dispatch(DoUpdateTodoMiddlewareAction((updates) => updates
+            ..updatedTodo = updatedTodo.toBuilder()
+            ..statusKey = DoUpdateTodoMiddlewareAction.createStatusKey(todo)));
+        }
+        ..onTodoEdited = (todo, name) {
+          final updatedTodo = todo.rebuild((updates) => updates..name = name);
+          store.dispatch(DoUpdateTodoMiddlewareAction((updates) => updates
+            ..updatedTodo = updatedTodo.toBuilder()
+            ..statusKey = DoUpdateTodoMiddlewareAction.createStatusKey(todo)));
+        }),
       builder: (context, viewModel) {
         final onTileTapped = (Todo todo) async {
           String? newName = await showDialog(

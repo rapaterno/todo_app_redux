@@ -19,9 +19,10 @@ class TodoList extends StatelessWidget {
     return StoreConnector<AppState, TodoListViewModel>(
         distinct: true,
         converter: (store) => TodoListViewModel(
-              status: store.state
-                      .statuses[DoReadTodoMiddlewareAction.createStatusKey()] ??
-                  Status.idle,
+              (builder) => builder
+                ..status = store.state.statuses[
+                        DoReadTodoMiddlewareAction.createStatusKey()] ??
+                    Status.idle,
             ),
         builder: (context, viewModel) {
           if (viewModel.status == Status.loading) {

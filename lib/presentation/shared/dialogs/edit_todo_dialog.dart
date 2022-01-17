@@ -52,29 +52,27 @@ class EditTodoDialog extends StatelessWidget {
                 ],
               );
             },
-            converter: (store) => EditTodoViewModel(
-                    statuses: {
-                      DoUpdateTodoMiddlewareAction.createStatusKey(todo):
-                          store.state.statuses[
-                                  DoUpdateTodoMiddlewareAction.createStatusKey(
-                                      todo)] ??
-                              Status.idle,
-                      DoDeleteTodoMiddlewareAction.createStatusKey(): store
-                                  .state.statuses[
-                              DoDeleteTodoMiddlewareAction.createStatusKey()] ??
-                          Status.idle
-                    },
-                    onTodoUpdate: (updateTodo) => store.dispatch(
-                        DoUpdateTodoMiddlewareAction((builder) => builder
-                          ..updatedTodo = updateTodo.toBuilder()
-                          ..statusKey =
-                              DoUpdateTodoMiddlewareAction.createStatusKey(
-                                  updateTodo))),
-                    onTodoDelete: (deleteTodo) => store.dispatch(
-                        DoDeleteTodoMiddlewareAction((builder) => builder
-                          ..deletedTodo = deleteTodo.toBuilder()
-                          ..statusKey =
-                              DoDeleteTodoMiddlewareAction.createStatusKey()))))
+            converter: (store) => EditTodoViewModel((builder) => builder
+              ..statuses = {
+                DoUpdateTodoMiddlewareAction.createStatusKey(todo): store
+                            .state.statuses[
+                        DoUpdateTodoMiddlewareAction.createStatusKey(todo)] ??
+                    Status.idle,
+                DoDeleteTodoMiddlewareAction.createStatusKey():
+                    store.state.statuses[
+                            DoDeleteTodoMiddlewareAction.createStatusKey()] ??
+                        Status.idle
+              }
+              ..onTodoUpdate = (updateTodo) => store.dispatch(
+                  DoUpdateTodoMiddlewareAction((builder) => builder
+                    ..updatedTodo = updateTodo.toBuilder()
+                    ..statusKey = DoUpdateTodoMiddlewareAction.createStatusKey(
+                        updateTodo)))
+                ..onTodoDelete = (deleteTodo) => store.dispatch(
+                    DoDeleteTodoMiddlewareAction((builder) => builder
+                      ..deletedTodo = deleteTodo.toBuilder()
+                      ..statusKey =
+                          DoDeleteTodoMiddlewareAction.createStatusKey()))))
       ],
     );
   }

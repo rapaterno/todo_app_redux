@@ -1,7 +1,15 @@
+import 'package:built_value/built_value.dart';
 import 'package:todo_app_redux/data/enum/status.dart';
 
-class TodoListViewModel {
-  final Status status;
+part 'todo_list_view_model.g.dart';
 
-  TodoListViewModel({required this.status});
+abstract class TodoListViewModel
+    implements Built<TodoListViewModel, TodoListViewModelBuilder> {
+  // Fields
+  Status get status;
+
+  TodoListViewModel._();
+
+  factory TodoListViewModel([void Function(TodoListViewModelBuilder) updates]) =
+      _$TodoListViewModel;
 }
