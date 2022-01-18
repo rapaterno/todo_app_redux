@@ -7,6 +7,7 @@ import 'package:todo_app_redux/domain/todo/todo_actions.dart';
 import 'package:todo_app_redux/domain/todo/todo_state.dart';
 
 import '../mock_todos.dart';
+import 'helper.dart';
 
 void main() {
   group('TodoReducers', () {
@@ -45,8 +46,8 @@ void main() {
     });
 
     test('when updating todo', () {
-      final state = AppState((builder) =>
-          builder..todosState = TodoState.setup(mockTodos).toBuilder());
+      final state = AppState(
+          (builder) => builder..todosState = setup(mockTodos).toBuilder());
       final updatedTodoBuilder = mockTodos[2].toBuilder();
       updatedTodoBuilder.isComplete = true;
 
@@ -61,8 +62,8 @@ void main() {
     });
 
     test('when deleting todo', () {
-      final state = AppState((builder) =>
-          builder..todosState = TodoState.setup(mockTodos).toBuilder());
+      final state = AppState(
+          (builder) => builder..todosState = setup(mockTodos).toBuilder());
 
       final newState = appReducer(
           state,

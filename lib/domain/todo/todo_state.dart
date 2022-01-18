@@ -19,24 +19,5 @@ abstract class TodoState implements Built<TodoState, TodoStateBuilder> {
       ..incompleteIds = <String>[].build().toBuilder());
   }
 
-  factory TodoState.setup(List<Todo> setupTodos) {
-    List<String> _incompleteIds = [];
-    List<String> _completeIds = [];
-    Map<String, Todo> _todos = {};
-
-    setupTodos.forEach((element) {
-      _todos[element.id] = element;
-      if (element.isComplete) {
-        _completeIds.add(element.id);
-      } else {
-        _incompleteIds.add(element.id);
-      }
-    });
-    return TodoState((builder) => builder
-      ..todos = _todos.build().toBuilder()
-      ..completeIds = _completeIds.build().toBuilder()
-      ..incompleteIds = _incompleteIds.build().toBuilder());
-  }
-
   factory TodoState([void Function(TodoStateBuilder) updates]) = _$TodoState;
 }
