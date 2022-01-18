@@ -15,10 +15,15 @@ class App extends StatelessWidget {
     return StoreProvider<AppState>(
         store: store,
         child: MaterialApp(
+          navigatorKey: _getNavigatorKey(),
           title: "Todo Redux",
           theme: ThemeData(),
           initialRoute: Routes.allTasks,
           onGenerateRoute: AppRouter.generateRoute,
         ));
+  }
+
+  GlobalKey<NavigatorState> _getNavigatorKey() {
+    return GlobalKey<NavigatorState>();
   }
 }
