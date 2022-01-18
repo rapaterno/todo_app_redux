@@ -9,6 +9,7 @@ import 'package:todo_app_redux/domain/todo/todo_state.dart';
 import 'package:todo_app_redux/presentation/shared/dialogs/edit_todo_dialog.dart';
 import 'package:todo_app_redux/presentation/shared/todo_list/todo_list.dart';
 import 'package:todo_app_redux/presentation/view_models/todo_view_model.dart';
+import 'package:todo_app_redux/shared/keys.dart';
 
 class TodoView extends StatelessWidget {
   const TodoView({Key? key, this.isComplete}) : super(key: key);
@@ -43,6 +44,7 @@ class TodoView extends StatelessWidget {
               context: context,
               builder: (context) {
                 return EditTodoDialog(
+                  key: Key(SharedKeys.editDialog),
                   todo: todo,
                 );
               });

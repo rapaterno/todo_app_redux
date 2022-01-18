@@ -5,9 +5,9 @@ import 'package:todo_app_redux/data/model/todo.dart';
 import 'package:todo_app_redux/domain/app/app_state.dart';
 import 'package:todo_app_redux/domain/todo/todo_actions.dart';
 import 'package:todo_app_redux/presentation/view_models/edit_todo_view_model.dart';
+import 'package:todo_app_redux/shared/keys.dart';
 import 'dialog_wrapper.dart';
 
-const saveButtonKey = 'saveButtonKey';
 const errorText = 'There has been an error. Try again';
 
 class EditTodoDialog extends StatelessWidget {
@@ -25,6 +25,7 @@ class EditTodoDialog extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextField(
+          key: Key(SharedKeys.todoTextField),
           autofocus: true,
           controller: _textController,
         ),
@@ -38,13 +39,14 @@ class EditTodoDialog extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ElevatedButton(
+                      key: Key(SharedKeys.deleteButton),
                       onPressed: () {
                         viewModel.onTodoDelete(todo);
                         Navigator.pop(context);
                       },
                       child: Text('Delete')),
                   ElevatedButton(
-                      key: Key(saveButtonKey),
+                      key: Key(SharedKeys.saveButton),
                       onPressed: () {
                         Navigator.pop(context, _textController.text);
                       },

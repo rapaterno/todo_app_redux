@@ -4,12 +4,14 @@ import 'package:todo_app_redux/data/enum/status.dart';
 import 'package:todo_app_redux/domain/app/app_state.dart';
 import 'package:todo_app_redux/domain/todo/todo_actions.dart';
 import 'package:todo_app_redux/presentation/view_models/create_todo_view_model.dart';
+import 'package:todo_app_redux/shared/keys.dart';
 import 'dialog_wrapper.dart';
 
-const saveButtonKey = 'saveButtonKey';
 const errorText = 'There has been an error. Try again';
 
 class CreateTodoDialog extends StatelessWidget {
+  const CreateTodoDialog({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return DialogWrapper(title: "Create Todo", child: _buildChild(context));
@@ -22,6 +24,7 @@ class CreateTodoDialog extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextField(
+          key: Key(SharedKeys.todoTextField),
           autofocus: true,
           controller: _textController,
         ),
@@ -48,7 +51,7 @@ class CreateTodoDialog extends StatelessWidget {
                     child = Text('Save');
                   }
                   return ElevatedButton(
-                      key: Key(saveButtonKey),
+                      key: Key(SharedKeys.saveButton),
                       onPressed: () {
                         viewModel.onTodoCreate(_textController.text);
                         Navigator.pop(context);

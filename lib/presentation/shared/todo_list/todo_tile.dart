@@ -15,6 +15,7 @@ class TodoTile extends StatelessWidget {
   final Function(Todo) onTileTapped;
 
   Key get checkboxKey => Key(SharedKeys.checkboxButton(todo.id));
+  Key get tileKey => Key(SharedKeys.todoTile(todo.id));
 
   ///Returns a checked checkbox icon if [task.isComplete] is true, unchecked if false
   Widget _buildLeading() {
@@ -42,6 +43,7 @@ class TodoTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      key: tileKey,
       title: Text(todo.name),
       leading: _buildLeading(),
       onTap: () async => onTileTapped(todo),
