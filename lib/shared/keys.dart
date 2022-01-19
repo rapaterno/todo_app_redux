@@ -1,21 +1,31 @@
+import 'package:flutter/material.dart';
 import 'package:todo_app_redux/data/model/todo.dart';
 
 abstract class SharedKeys {
+  static final navKey = GlobalKey<NavigatorState>();
+  static String get mainApp => 'Main Todo Redux';
   static String get addButton => 'Add Button';
 
   static String checkboxButton(String todoId) {
     return '$todoId Checkbox Button';
   }
 
-  static String todoTile(String todoId) {
-    return '$todoId Todo Tile';
+  static String checkboxIcon(String todoId, bool isComplete) {
+    return '$todoId Checkbox Icon $isComplete';
+  }
+
+  static String todoTile(String todoId, String todoName) {
+    return '$todoId $todoName Todo Tile';
   }
 
   static String get saveButton => 'Save Button';
 
   static String get deleteButton => 'Delete Button';
 
-  static String get allTabButton => 'All Tab Button';
+  static String get allNavBarItem => 'All Navigation Bar Item';
+  static String get completeNavBarItem => 'Complete Navigation Bar Item';
+
+  static String get incompleteNavBarItem => 'Incomplete Navigation Bar Item';
 
   static String get todoTextField => 'Todo Text Field';
 
@@ -26,10 +36,6 @@ abstract class SharedKeys {
   static String get createDialog => 'Create Dialog';
 
   static String get editDialog => 'Edit Dialog';
-
-  static String get completeTabButton => 'Complete Tab Button';
-
-  static String get incompleteTabButton => 'Incomplete Tab Button';
 
   static String get bottomNavBar => 'Bottom Navigation Bar';
 }

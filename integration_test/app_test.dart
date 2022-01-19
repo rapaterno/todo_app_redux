@@ -11,26 +11,26 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('end-to-end test', () {
-    final integrationTodoText = DateTime.now().millisecond.toString();
+    String integrationTodoText =
+        "${DateTime.now().millisecond.toString()} - test";
     testWidgets('create new todo', (WidgetTester tester) async {
       app.main();
 
       await tester.pumpAndSettle();
 
-      final addTodo = find.byIcon(Icons.add);
+      final addTodoFinder = find.byKey(Key(SharedKeys.addButton));
 
-      await tester.tap(addTodo);
+      await tester.tap(addTodoFinder);
 
       await tester.pumpAndSettle();
 
-      expect(find.text('Create Todo'), findsOneWidget);
+      final createTextfieldFinder = find.byKey(Key(SharedKeys.todoTextField));
 
-      final createTextfield = find.byType(TextField);
+      expect(createTextfieldFinder, findsOneWidget);
+      await tester.enterText(createTextfieldFinder, integrationTodoText);
 
-      expect(createTextfield, findsOneWidget);
-      await tester.enterText(createTextfield, integrationTodoText);
-
-      await tester.tap(find.text('Save'));
+      final saveButtonFinder = find.byKey(Key(SharedKeys.saveButton));
+      await tester.tap(saveButtonFinder);
 
       await tester.pumpAndSettle();
 
@@ -42,7 +42,7 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      await tester.tap(find.text('Incomplete'));
+      await tester.tap(find.byKey(Key(SharedKeys.incompleteNavBarItem)));
 
       await tester.pumpAndSettle();
 
@@ -53,32 +53,48 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byIcon(Icons.check_box_outline_blank));
+      final todoId = app.getFirstTodoWithName(integrationTodoText);
+      final checkboxFinder = find.byKey(Key(SharedKeys.checkboxButton(todoId)));
+      final incompleteCheckboxIconFinder =
+          find.byKey(Key(SharedKeys.checkboxIcon(todoId, false)));
+      expect(incompleteCheckboxIconFinder, findsOneWidget);
+      await tester.tap(checkboxFinder);
 
       await tester.pumpAndSettle();
 
-      expect(tester.firstWidget(find.byType(TodoTile)), findsOneWidget);
+      final completeCheckboxIconFinder =
+          find.byKey(Key(SharedKeys.checkboxIcon(todoId, true)));
+      expect(completeCheckboxIconFinder, findsOneWidget);
     });
     testWidgets('edit todo name', (WidgetTester tester) async {
       final editedIntegrationText = "$integrationTodoText edited";
       app.main();
       await tester.pumpAndSettle();
 
-      await tester.tap(find.text(integrationTodoText));
+      final todoId = app.getFirstTodoWithName(integrationTodoText);
+      String todoName = integrationTodoText;
+      final todoTileFinder =
+          find.byKey(Key(SharedKeys.todoTile(todoId, todoName)));
+      await tester.tap(todoTileFinder);
 
       await tester.pumpAndSettle();
 
       expect(find.text('Edit Todo'), findsOneWidget);
 
-      final editTextfield = find.byType(TextField);
+      final editTextfieldFinder = find.byKey(Key(SharedKeys.todoTextField));
 
-      await tester.enterText(editTextfield, editedIntegrationText);
+      await tester.enterText(editTextfieldFinder, editedIntegrationText);
 
-      await tester.tap(find.text('Save'));
+      final saveButtonFinder = find.byKey(Key(SharedKeys.saveButton));
+      await tester.tap(saveButtonFinder);
 
       await tester.pumpAndSettle();
 
-      expect(find.text(editedIntegrationText), findsOneWidget);
+      integrationTodoText = editedIntegrationText;
+      todoName = integrationTodoText;
+      final editedTodoTileFinder =
+          find.byKey(Key(SharedKeys.todoTile(todoId, todoName)));
+      expect(editedTodoTileFinder, findsOneWidget);
     });
 
     // testWidgets('view complete todos', (WidgetTester tester) async {

@@ -4,41 +4,28 @@ import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-import 'package:todo_app_redux/data/model/todo.dart';
 import 'package:todo_app_redux/domain/app/app_state.dart';
 import 'package:todo_app_redux/presentation/app.dart';
-import 'package:flutter_driver/driver_extension.dart';
+import 'package:todo_app_redux/shared/keys.dart';
 
 void main() {
-  if (_isTest()) {
-    enableFlutterDriverExtension(handler: (message) async {
-      switch (message) {
-        case EventsConstants.getTodos:
-          return _getFirstTodoId();
-      }
-
-      return '';
-    });
-  }
   runApp(App());
 }
 
-String _getFirstTodoId() {
+String getFirstTodoWithName(String name) {
   final store = _getStore();
-  final keys = store.state.todosState.todos.keys.toList();
+  final todos = store.state.todosState.todos;
+  String returnId = "";
+  todos.forEach((id, todo) {
+    if (todo.name == name) {
+      returnId = todo.id;
+    }
+    ;
+  });
 
-  return keys.isEmpty ? "" : keys[0];
+  return returnId;
 }
 
 Store<AppState> _getStore() {
-  return StoreProvider.of<AppState>(
-      GlobalKey<NavigatorState>().currentContext!);
-}
-
-bool _isTest() {
-  return Platform.environment.containsKey('FLUTTER_TEST');
-}
-
-class EventsConstants {
-  static const String getTodos = 'Get Todos';
+  return StoreProvider.of<AppState>(SharedKeys.navKey.currentContext!);
 }

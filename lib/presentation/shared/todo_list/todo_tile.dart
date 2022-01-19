@@ -14,8 +14,10 @@ class TodoTile extends StatelessWidget {
   final Function(Todo) onCheckboxTapped;
   final Function(Todo) onTileTapped;
 
+  Key get checkboxIcon =>
+      Key(SharedKeys.checkboxIcon(todo.id, todo.isComplete));
   Key get checkboxKey => Key(SharedKeys.checkboxButton(todo.id));
-  Key get tileKey => Key(SharedKeys.todoTile(todo.id));
+  Key get tileKey => Key(SharedKeys.todoTile(todo.id, todo.name));
 
   ///Returns a checked checkbox icon if [task.isComplete] is true, unchecked if false
   Widget _buildLeading() {
@@ -29,9 +31,12 @@ class TodoTile extends StatelessWidget {
                 : () => onCheckboxTapped(todo),
             child: viewModel.status == Status.loading
                 ? CircularProgressIndicator()
-                : Icon(todo.isComplete
-                    ? Icons.check_box
-                    : Icons.check_box_outline_blank),
+                : Icon(
+                    todo.isComplete
+                        ? Icons.check_box
+                        : Icons.check_box_outline_blank,
+                    key: checkboxIcon,
+                  ),
           );
         },
         converter: (store) => TodoTileViewModel((builder) => builder

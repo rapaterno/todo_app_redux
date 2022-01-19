@@ -4,6 +4,7 @@ import 'package:redux/redux.dart';
 import 'package:todo_app_redux/domain/app/app_state.dart';
 import 'package:todo_app_redux/domain/store.dart';
 import 'package:todo_app_redux/presentation/router/routes.dart';
+import 'package:todo_app_redux/shared/keys.dart';
 
 import 'router/router.dart';
 
@@ -15,7 +16,8 @@ class App extends StatelessWidget {
     return StoreProvider<AppState>(
         store: store,
         child: MaterialApp(
-          navigatorKey: _getNavigatorKey(),
+          key: Key(SharedKeys.mainApp),
+          navigatorKey: SharedKeys.navKey,
           title: "Todo Redux",
           theme: ThemeData(),
           initialRoute: Routes.allTasks,
