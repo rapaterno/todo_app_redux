@@ -1,11 +1,12 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:todo_app_redux/main.dart' as app;
-import 'package:todo_app_redux/presentation/shared/todo_list/todo_tile.dart';
 import 'package:todo_app_redux/shared/keys.dart';
+
+import 'screen_test.dart/create_todo_screen.dart';
+import 'screen_test.dart/edit_todo_screen.dart';
+import 'screen_test.dart/todo_screen.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -18,21 +19,12 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      final addTodoFinder = find.byKey(Key(SharedKeys.addButton));
+      final todoScreen = TodoScreen(tester);
+      await todoScreen.tapAddButton();
 
-      await tester.tap(addTodoFinder);
-
-      await tester.pumpAndSettle();
-
-      final createTextfieldFinder = find.byKey(Key(SharedKeys.todoTextField));
-
-      expect(createTextfieldFinder, findsOneWidget);
-      await tester.enterText(createTextfieldFinder, integrationTodoText);
-
-      final saveButtonFinder = find.byKey(Key(SharedKeys.saveButton));
-      await tester.tap(saveButtonFinder);
-
-      await tester.pumpAndSettle();
+      final createTodoScreen = CreateTodoScreen(tester);
+      await createTodoScreen.enterName(integrationTodoText);
+      await createTodoScreen.tapSaveButton();
 
       expect(find.text(integrationTodoText), findsOneWidget);
     });
@@ -42,11 +34,11 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(Key(SharedKeys.incompleteNavBarItem)));
+      final todoScreen = TodoScreen(tester);
+      await todoScreen.tapIncompleteNavBarItem();
 
-      await tester.pumpAndSettle();
-
-      expect(find.text(integrationTodoText), findsOneWidget);
+      final todoId = app.getFirstTodoWithName(integrationTodoText);
+      todoScreen.expectTile(todoId, integrationTodoText);
     });
     testWidgets('update todo status', (WidgetTester tester) async {
       app.main();
@@ -54,58 +46,44 @@ void main() {
       await tester.pumpAndSettle();
 
       final todoId = app.getFirstTodoWithName(integrationTodoText);
-      final checkboxFinder = find.byKey(Key(SharedKeys.checkboxButton(todoId)));
-      final incompleteCheckboxIconFinder =
-          find.byKey(Key(SharedKeys.checkboxIcon(todoId, false)));
-      expect(incompleteCheckboxIconFinder, findsOneWidget);
-      await tester.tap(checkboxFinder);
 
-      await tester.pumpAndSettle();
+      final todoScreen = TodoScreen(tester);
+      await todoScreen.tapCheckbox(todoId, integrationTodoText);
 
-      final completeCheckboxIconFinder =
-          find.byKey(Key(SharedKeys.checkboxIcon(todoId, true)));
-      expect(completeCheckboxIconFinder, findsOneWidget);
+      todoScreen.expectCheckboxWithStatus(todoId, integrationTodoText, true);
     });
     testWidgets('view complete todos', (WidgetTester tester) async {
       app.main();
 
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(Key(SharedKeys.completeNavBarItem)));
+      final todoScreen = TodoScreen(tester);
+      await todoScreen.tapCompleteNavBarItem();
 
-      await tester.pumpAndSettle();
-
-      expect(find.text(integrationTodoText), findsOneWidget);
+      final todoId = app.getFirstTodoWithName(integrationTodoText);
+      todoScreen.expectTile(todoId, integrationTodoText);
     });
     testWidgets('edit todo name', (WidgetTester tester) async {
       final editedIntegrationText = "$integrationTodoText edited";
       app.main();
       await tester.pumpAndSettle();
 
-      final todoId = app.getFirstTodoWithName(integrationTodoText);
       String todoName = integrationTodoText;
-      final todoTileFinder =
-          find.byKey(Key(SharedKeys.todoTile(todoId, todoName)));
-      await tester.tap(todoTileFinder);
+      final todoId = app.getFirstTodoWithName(todoName);
 
-      await tester.pumpAndSettle();
+      final todoScreen = TodoScreen(tester);
+      final editTodoScreen = EditTodoScreen(tester);
 
-      expect(find.text('Edit Todo'), findsOneWidget);
+      await todoScreen.tapTodoTile(todoId, todoName);
 
-      final editTextfieldFinder = find.byKey(Key(SharedKeys.todoTextField));
+      await editTodoScreen.enterName(editedIntegrationText);
+      await editTodoScreen.tapSaveButton();
 
-      await tester.enterText(editTextfieldFinder, editedIntegrationText);
-
-      final saveButtonFinder = find.byKey(Key(SharedKeys.saveButton));
-      await tester.tap(saveButtonFinder);
-
-      await tester.pumpAndSettle();
-
+      //For succedding tests to that integrationTodoTest to find id;
       integrationTodoText = editedIntegrationText;
       todoName = integrationTodoText;
-      final editedTodoTileFinder =
-          find.byKey(Key(SharedKeys.todoTile(todoId, todoName)));
-      expect(editedTodoTileFinder, findsOneWidget);
+
+      todoScreen.expectTile(todoId, todoName);
     });
 
     testWidgets('delete todo', (WidgetTester tester) async {
@@ -114,19 +92,14 @@ void main() {
       await tester.pumpAndSettle();
       final todoId = app.getFirstTodoWithName(integrationTodoText);
       String todoName = integrationTodoText;
-      final todoTileFinder =
-          find.byKey(Key(SharedKeys.todoTile(todoId, todoName)));
-      expect(todoTileFinder, findsOneWidget);
 
-      await tester.tap(todoTileFinder);
-      await tester.pumpAndSettle();
+      final todoScreen = TodoScreen(tester);
+      final editTodoScreen = EditTodoScreen(tester);
 
-      final deleteButtonFinder = find.byKey(Key(SharedKeys.deleteButton));
-      await tester.tap(deleteButtonFinder);
+      await todoScreen.tapTodoTile(todoId, todoName);
+      await editTodoScreen.tapDeleteButton();
 
-      await tester.pumpAndSettle();
-
-      expect(todoTileFinder, findsNothing);
+      todoScreen.expectMissingTile(todoId, todoName);
     });
   });
 }
