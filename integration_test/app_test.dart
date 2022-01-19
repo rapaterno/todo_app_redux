@@ -66,6 +66,17 @@ void main() {
           find.byKey(Key(SharedKeys.checkboxIcon(todoId, true)));
       expect(completeCheckboxIconFinder, findsOneWidget);
     });
+    testWidgets('view complete todos', (WidgetTester tester) async {
+      app.main();
+
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(Key(SharedKeys.completeNavBarItem)));
+
+      await tester.pumpAndSettle();
+
+      expect(find.text(integrationTodoText), findsOneWidget);
+    });
     testWidgets('edit todo name', (WidgetTester tester) async {
       final editedIntegrationText = "$integrationTodoText edited";
       app.main();
@@ -97,24 +108,25 @@ void main() {
       expect(editedTodoTileFinder, findsOneWidget);
     });
 
-    // testWidgets('view complete todos', (WidgetTester tester) async {
-    //   app.main();
-    //   await tester.tap(find.bySemanticsLabel('Complete'));
-    //   await tester.pumpAndSettle();
-    //   expect(find.text(integrationTodoText), findsNothing);
-    // });
-    // testWidgets('delete todo', (WidgetTester tester) async {
-    //   app.main();
-    //   expect(find.text(integrationTodoText), findsOneWidget);
-    //   await tester.tap(find.bySemanticsLabel('All'));
-    //   await tester.pumpAndSettle();
-    //   await tester.tap(find.bySemanticsLabel(integrationTodoText));
-    //   await tester.pumpAndSettle();
-    //   await tester.tap(find.bySemanticsLabel('Delete'));
+    testWidgets('delete todo', (WidgetTester tester) async {
+      app.main();
 
-    //   await tester.pumpAndSettle();
+      await tester.pumpAndSettle();
+      final todoId = app.getFirstTodoWithName(integrationTodoText);
+      String todoName = integrationTodoText;
+      final todoTileFinder =
+          find.byKey(Key(SharedKeys.todoTile(todoId, todoName)));
+      expect(todoTileFinder, findsOneWidget);
 
-    //   expect(find.text(integrationTodoText), findsNothing);
-    // });
+      await tester.tap(todoTileFinder);
+      await tester.pumpAndSettle();
+
+      final deleteButtonFinder = find.byKey(Key(SharedKeys.deleteButton));
+      await tester.tap(deleteButtonFinder);
+
+      await tester.pumpAndSettle();
+
+      expect(todoTileFinder, findsNothing);
+    });
   });
 }
